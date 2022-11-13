@@ -2,7 +2,7 @@
 
 ### To install this fork use the installer below
 
-### Trying to install this on a server not built by this installer will cause crashes !
+### Trying to install this on a server not built by this installer will cause crashes!
 #### Please go to https://github.com/SabiasQueSpace/SQS_Yiimp-Server-Installer for the installer.
 
 ## Changes to this fork include but not limited to:
