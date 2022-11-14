@@ -177,9 +177,13 @@ foreach ($algos as $item)
 
             // Show new currency label
             if( ( time() - $coin->created ) <= YAAMP_NEW_COINS )
-                $newCoin = 'new';
+            
+            if ( YAAMP_ADIM_LTE )
+                 $newCoin = "<span class='badge badge-success'>New</span>";
+            else
+                 $newCoin = "<span style='color:#43F50A'>New</span>";
 
-            echo "<td align='left' valign='top' style='font-size: .8em;'><img width='16' src='" . $coin->image . "'>  <b>$name <span style='color:#43F50A'>$newCoin</span> </b> </td>";
+            echo "<td align='left' valign='top' style='font-size: .8em;'><img width='16' src='" . $coin->image . "'>  <b>$name </b> {$newCoin} </td>";
             $port_count = getdbocount('db_stratums', "algo=:algo and symbol=:symbol", array(
                 ':algo' => $algo,
                 ':symbol' => $symbol
