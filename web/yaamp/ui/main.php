@@ -199,7 +199,9 @@ if ( YAAMP_ADIM_LTE )
 
         //echo '<span id="nextpayout" style="font-size: .8em;" title="' . $eta_mn . '">Next Payout: ' . $nextpayment . '</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
         // echo '<span id="nextpayout" style="font-size: .8em;" title="'.$eta_mn.'">Next Payout: '.$nextpayment.' / '.$nextpaymentEUR.'</span>';
-        echo '<span id="nextpayout" style="font-size: .8em;" title="'.$eta_mn.'">Next Payout: '.$nextpayment.' UTC (US) / '.$nextpaymentEUR.' UTC+2 (EUR)</span>';
+        //echo '<span id="nextpayout" style="font-size: .8em;" title="'.$eta_mn.'">Next Payout: '.$nextpayment.' UTC (US) / '.$nextpaymentEUR.' UTC+2 (EUR)</span>';
+        //Next Payout: 18:44 UTC in 20 minutes
+        echo '<span id="nextpayout" style="font-size: .8em;" title="' . $nextpayment . '">Next Payout: ' . $nextpayment . ' ' . $eta_mn . '</span>';
 
         echo "</div>";
         echo "</div>";
