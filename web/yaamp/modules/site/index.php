@@ -109,7 +109,7 @@ else
 
 <center>
 <ul>
-    <li><b>Welcome to your new mining pool, domain !</b></li>
+    <li><b>Welcome to your new mining pool, <?=YAAMP_SITE_URL ?> </b></li>
     <li>This installation was completed using the SabiasQue.Sapce Yiimp Server Installer.</li>
     <li>Any edits to this page should be made to, /home/yiimp-data/yiimp/site/web/yaamp/modules/site/index.php</li>
     <li>&nbsp;</li>
