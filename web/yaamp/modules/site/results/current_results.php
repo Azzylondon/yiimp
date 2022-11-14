@@ -1,12 +1,14 @@
 <?php
 
-include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
+if ( YAAMP_ADIM_LTE )
+     include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
 
 $defaultalgo = user()->getState('yaamp-algo');
 
 if ( YAAMP_ADIM_LTE )
 {
   openCard('card-primary','Pool Status');
+  echo '<div class="card-body table-responsive p-0">'; 
 }
 else
 {
@@ -14,8 +16,6 @@ else
   echo "<div class='main-left-title'>Pool Status</div>";
   echo "<div class='main-left-inner'>";
 }
-
-echo '<div class="card-body table-responsive p-0">'; 
 
 showTableSorter('maintable1', "{
     tableClass: 'dataGrid2',
@@ -30,7 +30,8 @@ echo <<<END
 <th>Coins</th>
 <th data-sorter="numeric" style="font-size: .8em" align="center">Auto Exchanged</th>
 <th data-sorter="numeric" style="font-size: .8em" align="center">Port</th>
-<th data-sorter="numeric" style="font-size: .8em" align="center">Symbol</th>
+<th data-sorter="numeric" style="font-size: .8em" align="center">Users pending payments</th>
+<th data-sorter="numeric" style="font-size: .8em" align="center">Minimum Payment</th>
 <th data-sorter="numeric" style="font-size: .8em" align="center">Miners<br/>Share / Solo</th>
 <th data-sorter="numeric" style="font-size: .8em" align="center">Pool Hashrate</th>
 <th data-sorter="numeric" style="font-size: .8em" align="center">Network Hashrate</th>
@@ -171,8 +172,10 @@ foreach ($algos as $item)
         {
             $name = substr($coin->name, 0, 18);
             $symbol = $coin->getOfficialSymbol();
+            $minpayout = ($coin->payout_min == null)?YAAMP_PAYMENTS_MINI:$coin->payout_min;
             $newCoin = '';
 
+            // Show new currency label
             if( ( time() - $coin->created ) <= YAAMP_NEW_COINS )
                 $newCoin = 'new';
 
@@ -195,7 +198,14 @@ foreach ($algos as $item)
             else 
 			     echo "<td align='center' style='font-size: .8em;'><b>$port</b></td>";
 
-                             echo "<td align='center' style='font-size: .8em;'>$symbol</td>";
+            // Users pending payments
+            $users_coin = getdbolist('db_accounts', "coinid=:coinid AND (balance>.001 OR id IN (SELECT DISTINCT userid FROM workers)) ORDER BY balance DESC", array(
+                        ':coinid' => $coin->id
+                ));
+            $users_coin = (!$users_coin)?0:count($users_coin);
+            echo "<td align='center' style='font-size: .8em;'>$users_coin</td>";
+
+            echo "<td align='center' style='font-size: .8em;'><span style='color:#ABAD52'>$minpayout</span> $symbol</td>";
 
             $workers_coins = getdbocount('db_workers', "algo=:algo and pid=:pid and not password like '%m=solo%'", array(
                 ':algo' => $algo,
@@ -265,8 +275,8 @@ echo "<td><b>all</b></td>";
 echo "<td></td>";
 echo "<td></td>";
 echo "<td align=center style='font-size: .8em;'>$total_coins</td>";
-echo "<td align=center style='font-size: .8em;'>$total_miners / $total_solo <br> Total workers: ".($total_miners + $total_solo)."</td>";
 echo "<td></td>";
+echo "<td align=center style='font-size: .8em;'>$total_miners / $total_solo <br> Total workers: ".($total_miners + $total_solo)."</td>";
 echo "<td></td>";
 echo '<td class="estimate"></td>';
 echo '<td class="estimate"></td>';
@@ -277,7 +287,8 @@ echo "</table>";
 echo '<p style="font-size: .8em;">&nbsp;* values in mBTC/MH/day, per GH for sha & blake algos</p>';
 
 echo "</div></div><br />";
-echo '</div>'; //card-body table-responsive p-0
+if ( YAAMP_ADIM_LTE )
+    echo '</div>'; //card-body table-responsive p-0
 ?>
 
 <?php

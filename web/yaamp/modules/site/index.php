@@ -1,7 +1,10 @@
 <?php
 
-include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
-include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/content.php";
+if ( YAAMP_ADIM_LTE ) 
+{
+  include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
+  include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/content.php";
+}
 
 $algo = user()->getState('yaamp-algo');
 
@@ -34,7 +37,7 @@ if ( YAAMP_ADIM_LTE )
 
 if ( YAAMP_ADIM_LTE )
 {
-  echo'<div class="row">';
+  echo '<div class="row">';
   echo '<div class="col-lg-6">';
   openCard('card-primary','Important announcement');
 }
