@@ -52,7 +52,7 @@ openMainContent();
                                   <!-- /.comment-text -->
                                 </div>
                                 <!-- /.card-comment -->
-                              </div> 
+                              </div> <br>
                         <?php
                       }
                   }
@@ -60,7 +60,7 @@ openMainContent();
 
    echo '</div></div>'; //close card Important announcement
    // card Welcome
-   openCard('card-primary', YAAMP_SITE_URL);
+   openCard('card-primary', ucwords( YAAMP_SITE_URL ) );
    ?>
     <center>
     <dl>
@@ -85,7 +85,7 @@ openMainContent();
    <?php
    echo '</div></div>'; //close card Welcome
 
-   openCard('card-primary','Worker Configurator');
+   openCard('card-primary', 'Worker Configurator' );
    ?>
    <!-- End new stratum generation code  -->
    <center>
@@ -194,7 +194,7 @@ openMainContent();
    <?php
    echo '</div></div>'; //close card Worker Configurator
 
-   openCard('card-primary', YAAMP_SITE_URL.' Links');
+   openCard('card-primary', ucwords( YAAMP_SITE_URL ).' Links');
    ?>
       <ul>
         <li><b>API</b> - <a href='/site/api'>http://<?=YAAMP_SITE_URL
@@ -222,7 +222,7 @@ openMainContent();
       </ul>
     <?php
     echo '</div></div>'; //close card  links
-    openCard('card-primary', YAAMP_SITE_URL.' Support');
+    openCard('card-primary', ucwords( YAAMP_SITE_URL ).' Support');
     ?>
     <ul class="social-icons">
         <li><a href="http://www.discord.com"><img src='/images/discord.png' /></a></li>
