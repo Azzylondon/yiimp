@@ -24,7 +24,7 @@ echo <<<END
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-<meta name="description" content="Built With Dirty Harry Yiimp Server Installer">
+<meta name="description" content="Built With  SabiasQue.Space Yiimp Server Installer">
 <meta name="keywords" content="anonymous,mining,pool,maxcoin,bitcoin,altcoin,auto,switch,exchange,profit,decred,scrypt,x11,x13,x14,x15,lbry,lyra2re,neoscrypt,sha256,quark,skein2,BTC,btc">
 
 END;
@@ -84,27 +84,10 @@ if ( YAAMP_ADIM_LTE )
 * Mostrar publicidad si no eres administrador
 * Show ads if you are not an administrator
 */
-
 if(!controller()->admin)
    echo <<<end
    // code publicidad
    end;
-
-// if(!controller()->admin)
-// echo <<<end
-// <script>
-// (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-// (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-// m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-// })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-// ga('create', 'UA-58136019-1', 'auto');
-// ga('send', 'pageview');
-
-// $(document).ajaxSuccess(function(){ga('send', 'pageview');});
-
-// </script>
-// end;
 
 echo "</head>";
 

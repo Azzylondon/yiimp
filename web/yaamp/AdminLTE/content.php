@@ -1,5 +1,17 @@
 <?php
 
+function showItem_Header($selected, $url, $name)
+{
+    if ($selected)
+        $selected_text = "class='nav-link'";
+    else
+        $selected_text = '';
+
+        echo "<li class='nav-item d-none d-sm-inline-block'><a class='nav-link' href='$url'>$name</a></li>";
+       //echo "&nbsp;";
+}
+
+
 function openMainContent() 
 { ?>
    <div class="wrapper">
@@ -16,27 +28,46 @@ function openMainContent()
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="/index.php" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="/site/mining" class="nav-link">Pool</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="/coin" class="nav-link">Coin</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="/?address=" class="nav-link">Wallet</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="/site/miners" class="nav-link">Miners</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="/explorer" class="nav-link">Explores</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
-            </li>
+            <?php
+
+                $action = controller()->action->id;
+                $wallet = user()->getState('yaamp-wallet');
+                $ad     = isset($_GET['address']);
+
+                showItem_Header(controller()->id == 'site' && $action == 'index' && !$ad, '/', 'Home');
+                showItem_Header($action == 'mining', '/site/mining', 'Pool');
+                showItem_Header(controller()->id == 'site' && ($action == 'index' || $action == 'wallet') && $ad, "/?address=$wallet", 'Wallet');
+                showItem_Header(controller()->id == 'stats', '/stats', 'Graphs');
+                showItem_Header($action == 'miners', '/site/miners', 'Miners');
+                if (YIIMP_PUBLIC_EXPLORER)
+                    showItem_Header(controller()->id == 'explorer', '/explorer', 'Explorers');
+
+                if (YIIMP_PUBLIC_BENCHMARK)
+                    showItem_Header(controller()->id == 'bench', '/bench', 'Benchs');
+
+                if (YAAMP_RENTAL)
+                    showItem_Header(controller()->id == 'renting', '/renting', 'Rental');
+
+                if (controller()->admin) {
+                    if (isAdminIP($_SERVER['REMOTE_ADDR']) === false)
+                        debuglog("admin {$_SERVER['REMOTE_ADDR']}");
+
+                    showItem_Header(controller()->id == 'coin', '/coin', 'Coins');
+                    showItem_Header($action == 'common', '/site/common', 'Dashboard');
+                    showItem_Header(controller()->id == 'site' && $action == 'admin', "/site/admin", 'Wallets');
+
+                    if (YAAMP_RENTAL)
+                        showItem_Header(controller()->id == 'renting' && $action == 'admin', '/renting/admin', 'Jobs');
+
+                    if (YAAMP_ALLOW_EXCHANGE)
+                        showItem_Header(controller()->id == 'trading', '/trading', 'Trading');
+
+                    if (YAAMP_USE_NICEHASH_API)
+                        showItem_Header(controller()->id == 'nicehash', '/nicehash', 'Nicehash');
+                }
+
+
+            ?>
             </ul>
 
             <!-- Right navbar links -->
