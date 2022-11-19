@@ -48,21 +48,24 @@ openMainContent();
 
    <?php
    echo '</div></div>'; //close card Important announcement 
+   // card Welcome
    openCard('card-primary', YAAMP_SITE_URL);
    ?>
     <center>
-    <ul>
-        <li><b>Welcome to your new mining pool, <?=YAAMP_SITE_URL ?> </b></li>
-        <li>This installation was completed using the SabiasQue.Sapce Yiimp Server Installer.</li>
-        <li>Any edits to this page should be made to, /home/yiimp-data/yiimp/site/web/yaamp/modules/site/index.php</li>
-        <li>&nbsp;</li>
-        <li>No registration is required, we do payouts in the currency you mine. Use your wallet address as the username.</li>
-        <li>&nbsp;</li>
-        <li>Payouts are made automatically every <?=$payout_freq ?> for all balances above <b><?=$min_payout ?></b>, or <b><?=$min_sunday ?></b> on Sunday.</li>
-        <li>For some coins, there is an initial delay before the first payout, please wait at least 6 hours before asking for support.</li>
-        <li>Blocks are distributed proportionally among valid submitted shares.</li>
-        <br/>
-    </ul>
+    <dl>
+        <dt class="text-info">Welcome to your new mining pool, <?=YAAMP_SITE_URL ?></dt>
+        <dd class="text-danger">Any edits to this page should be made to, /home/yiimp-data/yiimp/site/web/yaamp/modules/site/index.php</dd>
+          <dd class="text-info">
+            No registration is required, we do payouts in the currency you mine. Use your wallet address as the username.
+          </dd>
+          <dd class="text-info">
+            Payouts are made automatically every <?=$payout_freq ?> for all balances above <b><?=$min_payout ?></b>, or <b><?=$min_sunday ?></b> on Sunday.
+          </dd>
+          <dd class="text-warning">For some coins, there is an initial delay before the first payout, please wait at least 6 hours before asking for support.</dd>
+          <dd class="text-info">
+            Blocks are distributed proportionally among valid submitted shares.
+          </dd>
+      </dl>
     </center>
     <br/>
 
@@ -163,12 +166,16 @@ openMainContent();
           </tbody>
       </table>
 
-      <ul>
-        <li><b>Your WALLET ADDRESS must be valid for the currency you mine !</b></li>
-        <li><b>DO NOT USE a BTC address here, the auto exchange is disabled on these stratums !</b></li>
-        <li>See the "domain Coins" area on the right for PORT numbers. You may mine any coin regardless if the coin is enabled or not for autoexchange. Payouts will only be made in that coins currency.</li>
-        <br>
-      </ul>
+      <dl>
+        <dt class="text-warning">Your WALLET ADDRESS must be valid for the currency you mine !</dt>
+        <dt class="text-danger">DO NOT USE a BTC address here, the auto exchange is disabled on these stratums !</dt>
+          <dd class="text-info">
+            See the "domain Coins" area on the right for PORT numbers. You may mine any coin 
+            regardless if the coin is enabled or not for autoexchange. Payouts will only be made in that coins currency.
+          </dd>
+      </dl>
+
+
 </center><br>
 
 <!-- End new stratum generation code  -->
