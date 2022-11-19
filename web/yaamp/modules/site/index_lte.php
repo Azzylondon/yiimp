@@ -16,11 +16,11 @@ $payout_freq = (YAAMP_PAYMENTS_FREQ / 3600) . " hours";
 openMainContent(); 
 ?>
 
-<div class="alert alert-warning alert-dismissible">
+<div id='resume_update_button' class="alert alert-warning alert-dismissible">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
   <h5><i class="icon fas fa-exclamation-triangle"></i> Auto Refresh Is Paused </h5>
-  
-        <div id='resume_update_button' style='color: #ffffff; background-color: #41464b; border: 1px solid #7d7d7d;
+
+        <div style='color: #ffffff; background-color: #41464b; border: 1px solid #7d7d7d;
           padding: 10px; margin-left: 20px; margin-right: 20px; margin-top: 15px; cursor: pointer; display: none;'
           onclick='auto_page_resume();' align=center>
           <b>Auto Refresh Is Paused - Click Here To Resume</b>
@@ -74,6 +74,105 @@ openMainContent();
    openCard('card-primary','Worker Configurator');
    ?>
    <!-- End new stratum generation code  -->
+   <center>
+      <table>
+        <thead>
+          <tr>
+            <th>Stratum Location</th>
+            <th>Choose Coin</th>
+            <th>Your Wallet Address</th>
+            <th>Rig (opt.)</th>
+            <th>Solo Mine</th>
+            <th>Start Mining</th>
+          </tr>
+        </thead>
+          <tbody>
+            <tr>
+              <td>
+                <select id="drop-stratum" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1"  aria-hidden="true">
+                  <!-- Add your stratum locations here -->
+                  <option value="usa">USA</option>
+                  <!--<option value="asia.">Asia</option>
+                  <option value="us.west.">USA</option>
+                  <option value="aus.">AUS Stratum</option>
+                  <option value="cad.">CAD Stratum</option>
+                  <option value="uk.">UK Stratum</option> -->
+                </select>
+              </td>
+
+              <td>
+              <select id="drop-coin" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1"  aria-hidden="true">
+                                          <?php
+                                          $list = getdbolist('db_coins', "enable and visible and auto_ready order by algo asc");
+                                  
+                                          $algoheading="";
+                                          $count=0;
+                                          foreach($list as $coin)
+                                          {
+                                                                  $name = substr($coin->name, 0, 18);
+                                                                  $symbol = $coin->getOfficialSymbol();
+                                                  $id = $coin->id;
+                                                  $algo = $coin->algo;
+                                  
+                                          $port_count = getdbocount('db_stratums', "algo=:algo and symbol=:symbol", array(
+                                          ':algo' => $algo,
+                                          ':symbol' => $symbol
+                                          ));
+                                  
+                                          $port_db = getdbosql('db_stratums', "algo=:algo and symbol=:symbol", array(
+                                          ':algo' => $algo,
+                                          ':symbol' => $symbol
+                                          ));
+                                  
+                                          if ($port_count >= 1){$port = $port_db->port;}else{$port = '0.0.0.0';}
+                                          if($count == 0){ echo "<option disabled=''>$algo";}elseif($algo != $algoheading){echo "<option disabled=''>$algo</option>";}
+                                          echo "<option data-port='$port' data-algo='-a $algo' data-symbol='$symbol'>$name ($symbol)</option>";
+                                  
+                                          $count=$count+1;
+                                          $algoheading=$algo;
+                                          }
+                                          ?>
+                  </select>
+              </td>
+
+              <td>
+                <!-- Change your demo wallet here -->
+                <input id="text-wallet" class="form-control" type="text" size="35" placeholder="RF9D1R3Vt7CECzvb1SawieUC9cYmAY1qoj">
+              </td>
+              
+              <td>
+                <input id="text-rig-name" class="form-control" type="text" size="10" placeholder="rig01">
+              </td>
+
+              <td>
+                <select id="drop-solo" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1"  aria-hidden="true">
+                <option value="">No</option>
+                <option value=",m=solo">Yes</option>
+                </select>
+              </td>
+
+              <td>
+                <input id="Generate!" type="button" value="Create String" class="btn btn-block bg-gradient-secondary" onclick="generate()">
+              </td>
+
+            </tr>
+            <tr>
+              <td colspan="7"><p class="main-left-box" style="padding: 3px; color: #000000; background-color: #ffffff; font-family: monospace;" id="output">-a  -o stratum+tcp://<?=YAAMP_SITE_URL;?>:0000 -u . -p c=</p>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+
+      <ul>
+        <li><b>Your WALLET ADDRESS must be valid for the currency you mine !</b></li>
+        <li><b>DO NOT USE a BTC address here, the auto exchange is disabled on these stratums !</b></li>
+        <li>See the "domain Coins" area on the right for PORT numbers. You may mine any coin regardless if the coin is enabled or not for autoexchange. Payouts will only be made in that coins currency.</li>
+        <br>
+      </ul>
+</center><br>
+
+<!-- End new stratum generation code  -->
+
    <?php
    echo '</div></div>'; //close card Worker Configurator
 
