@@ -166,7 +166,7 @@ openMainContent();
               </td>
 
               <td>
-                <input id="Generate!" type="button" value="Create String" class="btn btn-block bg-gradient-secondary" onclick="generate()">
+                <input id="Generate!" type="button" value="Generate" class="btn btn-block bg-gradient-secondary" onclick="generate()">
               </td>
 
             </tr>

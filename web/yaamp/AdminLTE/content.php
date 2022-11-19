@@ -6,7 +6,7 @@ function openMainContent()
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+        <img class="animation__wobble" src="dist/img/logo.png" alt="Logo" height="60" width="60">
         </div>
 
         <!-- Navbar -->
@@ -226,9 +226,9 @@ function openMainContent()
                  $mining = getdbosql('db_mining');
                  $nextpayment = date('H:i T', $mining->last_payout+YAAMP_PAYMENTS_FREQ);
                  $eta = ($mining->last_payout+YAAMP_PAYMENTS_FREQ) - time();
-                 $eta_mn = 'in '.round($eta / 60).' minutes';
+                 $eta_mn = round($eta / 60);
                  ?>
-                 <h1 class="m-0"> <?='<span id="nextpayout" style="font-size: .8em;" title="' . $nextpayment . '">Next Payout: ' . $nextpayment . ' ' . $eta_mn . '</span>';?></h1> 
+                 <h1 class="m-0"> <?='<span id="nextpayout" style="font-size: .8em;" title="' . $nextpayment . '">Next Payout: ' . $nextpayment . '</span> in <b style="color:#43F50A"> ' . $eta_mn . '</b> minutes';?></h1> 
                   </div><!-- /.col -->
                    <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
