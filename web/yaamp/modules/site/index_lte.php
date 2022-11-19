@@ -32,22 +32,35 @@ openMainContent();
   <div class="col-lg-6">
     <?php
     openCard('card-primary','Important announcement');
-      echo'<ul>';
-              if (defined('URGEN_NOTE')) 
+
+              if (defined('URGEN_NOTE'))
               {
                   foreach (URGEN_NOTE as $key => $value)
                   {
                       if($value[0] == 'HOME')
                       {
-                      echo '<li style="color:'. $value[1] .'";>'. $value[3] .'</li>';
+                      ?>
+                          <div class="card-footer card-comments">
+                                <div class="card-comment">
+                                  <!-- User image -->
+                                  <!-- <img class="img-circle img-sm" src="img.jpg" alt="User Image"> -->
+                                  <div class="comment-text">
+                                    <span class="username">
+                                      By Admin
+                                      <span class="text-muted float-right">00:00</span>
+                                    </span><!-- /.username -->
+                                    <?='<li style="color:'. $value[1] .'";>'. $value[3] .'</li>';?>
+                                  </div>
+                                  <!-- /.comment-text -->
+                                </div>
+                                <!-- /.card-comment -->
+                              </div> 
+                        <?php
                       }
                   }
               }
-    ?>
-          </ul>
 
-   <?php
-   echo '</div></div>'; //close card Important announcement 
+   echo '</div></div>'; //close card Important announcement
    // card Welcome
    openCard('card-primary', YAAMP_SITE_URL);
    ?>
