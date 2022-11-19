@@ -7,6 +7,5 @@
       <b>Version</b> LTE 3.2.0-rc
     </div>
   </footer>
-  
-  </div>
+</div>
 <!-- ./wrapper -->

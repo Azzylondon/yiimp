@@ -140,7 +140,7 @@ function showItemHeader($selected, $url, $name)
     echo "&nbsp;";
 }
 
-if ( YAAMP_ADIM_LTE )
+if ( ! YAAMP_ADIM_LTE )
 {
 
     function showPageHeader()

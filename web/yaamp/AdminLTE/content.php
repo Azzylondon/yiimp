@@ -243,18 +243,16 @@ function openMainContent()
             
             <!-- Main content -->
             <section class="content">
-                <div class="container-fluid">
-                <!-- Info boxes -->
-<?php                    
-}
+             <div class="container-fluid">
+            <?php                    
+            }
 
 function closeMainContent() 
-{
+{ 
 ?>
-   </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+            </div><!--/. container-fluid -->
+          </section> <!-- /.content -->
+  </div> <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -263,5 +261,4 @@ function closeMainContent()
   <!-- /.control-sidebar -->
 <?php
 }
-
 ?>
