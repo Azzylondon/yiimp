@@ -13,20 +13,18 @@ $min_payout = floatval(YAAMP_PAYMENTS_MINI);
 $min_sunday = $min_payout / 10;
 $payout_freq = (YAAMP_PAYMENTS_FREQ / 3600) . " hours";
 
-openMainContent(); 
+openMainContent();
 ?>
-
-<div id='resume_update_button' class="alert alert-warning alert-dismissible">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-  <h5><i class="icon fas fa-exclamation-triangle"></i> Auto Refresh Is Paused </h5>
-
-        <div style='color: #ffffff; background-color: #41464b; border: 1px solid #7d7d7d;
-          padding: 10px; margin-left: 20px; margin-right: 20px; margin-top: 15px; cursor: pointer; display: none;'
-          onclick='auto_page_resume();' align=center>
-          <b>Auto Refresh Is Paused - Click Here To Resume</b>
-        </div>
-</div>
-
+<!-- Auto Refresh -->
+<div id='resume_update_button'style='color: #ffffff; background-color: #41464b; border: 1px solid #7d7d7d;
+  padding: 10px; margin-left: 20px; margin-right: 20px; margin-top: 15px; cursor: pointer; display: none;'
+  onclick='auto_page_resume();' align=center>
+    <div class="alert alert-warning alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <h5><i class="icon fas fa-exclamation-triangle"></i> Auto Refresh Is Paused - Click Here To Resume </h5>
+    </div>
+  </div>
+  <!-- ./Auto Refresh -->
 
 <div class="row">
   <div class="col-lg-6">
