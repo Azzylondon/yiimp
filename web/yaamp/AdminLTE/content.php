@@ -1,18 +1,8 @@
 <?php
 
-function showItem_Header($selected, $url, $name)
-{
-    if ($selected)
-        $selected_text = "class='nav-link'";
-    else
-        $selected_text = '';
+require_once 'function.php';
 
-        echo "<li class='nav-item d-none d-sm-inline-block'><a class='nav-link' href='$url'>$name</a></li>";
-       //echo "&nbsp;";
-}
-
-
-function openMainContent() 
+function openMainContent()
 { ?>
    <div class="wrapper">
 
