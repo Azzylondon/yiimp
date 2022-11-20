@@ -74,7 +74,7 @@ function openMainContent()
             <ul class="navbar-nav ml-auto">
             <!-- Navbar Search -->
             <li class="nav-item">
-                <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                <a class="nav-link" data-widget="navbar-search" href="/?address=<?=$wallet;?>" role="button">
                 <i class="fas fa-search"></i>
                 </a>
                 <div class="navbar-search-block">
@@ -187,7 +187,7 @@ function openMainContent()
                 <!-- Add icons to the links using the .nav-icon class
                     with font-awesome or any other icon font library -->
 
-                <li class="nav-item">
+              <!--  <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
@@ -212,33 +212,68 @@ function openMainContent()
                         </a>
                     </li>
                     </ul>
-                </li>
-                <li class="nav-header">EXAMPLES</li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-calendar-alt"></i>
-                    <p>
-                        test
-                        <span class="badge badge-info right">2</span>
-                    </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                    <i class="nav-icon far fa-image"></i>
-                    <p>
-                        test
-                    </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/kanban.html" class="nav-link">
-                    <i class="nav-icon fas fa-columns"></i>
-                    <p>
-                        test
-                    </p>
-                    </a>
-                </li>
+                </li> -->
+                <li class="nav-header">Pool</li>
+                    <?php
+                    function _showItem_Header($url, $name)
+                    {
+                        if ($name == "Home")
+                            $icon = 'fas fa-tachometer-alt';
+                        else if ($name == "Pool")
+                            $icon = 'fas fa-table';
+                        else if ($name == "Wallet")
+                            $icon = 'fas fa-wallet';
+                        else if ($name == "Wallets")
+                            $icon = 'fas fa-wallet';
+                        else if ($name == "Explorers")
+                            $icon = 'fas fa-circle';
+                        else if ($name == "Coins")
+                            $icon = 'fas fa-coins';
+                        else
+                            $icon = 'fas fa-circle'; // Defaut
+
+                        echo '<li class="nav-item">
+                                <a href='.$url.' class="nav-link">
+                                <i class="nav-icon '.$icon.'"></i>
+                                <p>
+                                  '.$name.'
+                                </p>
+                                </a>
+                              </li>';
+                    }
+
+                    _showItem_Header(controller()->id == 'site' && $action == 'index' && !$ad, '/', 'Home');
+                    _showItem_Header($action == 'mining', '/site/mining', 'Pool');
+                    _showItem_Header(controller()->id == 'site' && ($action == 'index' || $action == 'wallet') && $ad, "/?address=$wallet", 'Wallet');
+                    _showItem_Header(controller()->id == 'stats', '/stats', 'Graphs');
+                    _showItem_Header($action == 'miners', '/site/miners', 'Miners');
+                    if (YIIMP_PUBLIC_EXPLORER)
+                        _showItem_Header(controller()->id == 'explorer', '/explorer', 'Explorers');
+
+                    if (YIIMP_PUBLIC_BENCHMARK)
+                        _showItem_Header(controller()->id == 'bench', '/bench', 'Benchs');
+
+                    if (YAAMP_RENTAL)
+                        _showItem_Header(controller()->id == 'renting', '/renting', 'Rental');
+
+                    if (controller()->admin) {
+                        if (isAdminIP($_SERVER['REMOTE_ADDR']) === false)
+                            debuglog("admin {$_SERVER['REMOTE_ADDR']}");
+
+                        _showItem_Header(controller()->id == 'coin', '/coin', 'Coins');
+                        _showItem_Header($action == 'common', '/site/common', 'Dashboard');
+                        _showItem_Header(controller()->id == 'site' && $action == 'admin', "/site/admin", 'Wallets');
+
+                        if (YAAMP_RENTAL)
+                            _showItem_Header(controller()->id == 'renting' && $action == 'admin', '/renting/admin', 'Jobs');
+
+                        if (YAAMP_ALLOW_EXCHANGE)
+                            _showItem_Header(controller()->id == 'trading', '/trading', 'Trading');
+
+                        if (YAAMP_USE_NICEHASH_API)
+                            _showItem_Header(controller()->id == 'nicehash', '/nicehash', 'Nicehash');
+                    }
+                    ?>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
