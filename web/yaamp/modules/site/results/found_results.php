@@ -47,6 +47,11 @@ $criteria->limit = $count;
 $criteria->order = 't.time DESC';
 $db_blocks = getdbolistWith('db_blocks', 'coin', $criteria);
 
+if ( YAAMP_ADIM_LTE )
+    $claasTabla='table table-hover text-nowrap';
+else
+    $claasTabla='dataGrid2';
+
 echo <<<EOT
 
 <style type="text/css">
@@ -63,7 +68,7 @@ b.row a { font-size: 10pt; }
 td.right { text-align: right; }
 </style>
 
-<table class="dataGrid2">
+<table class="{$claasTabla}">
 <thead>
 <tr>
 <td></td>
@@ -112,15 +117,32 @@ foreach ($db_blocks as $db_block)
 
     $flags = $db_block->segwit ? '&nbsp;<img src="/images/ui/segwit.png" height="8px" valign="center" title="segwit"/>' : '';
 
+    if ( YAAMP_ADIM_LTE )
+    {
     echo '<tr class="ssrow">';
-    echo '<td width="18px"><img width="16px" src="' . $coin->image . '"></td>';
-    echo '<td class="row"><b class="row">' . $link . '</b> (' . $db_block->algo . ')' . $flags . '</td>';
-    echo '<td class="row right"><b>' . $reward . ' ' . $coin->symbol_show . '</b></td>';
-    echo '<td class="row right" title="found ' . $db_block->difficulty_user . '">' . $difficulty . '</td>';
-    echo '<td class="row right">' . $height . '</td>';
-    echo '<td class="row right">' . $d . ' ago</td>';
+    echo '<td width="18px"><img width="16px" src="'.$coin->image.'"></td>';
+    //echo '<td class="row"><b class="row">'.$link.'</b> ('.$db_block->algo.')'.$flags.'</td>';
+    echo '<td>'.$link.'</b> ('.$db_block->algo.')'.$flags.'</td>';
+    echo '<td><b>'.$reward.' '.$coin->symbol_show.'</b></td>';
+    echo '<td title="found '.$db_block->difficulty_user.'">'.$difficulty.'</td>';
+    echo '<td>'.$height.'</td>';
+    echo '<td>hace '.$d.'</td>';
+    echo '<td></th>';
+    echo '<td">';
+    }
+    else
+    {
+        echo '<tr class="ssrow">';
+        echo '<td width="18px"><img width="16px" src="' . $coin->image . '"></td>';
+        echo '<td class="row"><b class="row">' . $link . '</b> (' . $db_block->algo . ')' . $flags . '</td>';
+        echo '<td class="row right"><b>' . $reward . ' ' . $coin->symbol_show . '</b></td>';
+        echo '<td class="row right" title="found ' . $db_block->difficulty_user . '">' . $difficulty . '</td>';
+        echo '<td class="row right">' . $height . '</td>';
+        echo '<td class="row right">' . $d . ' ago</td>';
+        echo '<td class="row right">';
+    }
 
-    echo '<td class="row right">';
+
     if($db_block->solo == '1') 
 	    echo '<span class="solo" title="Block was found by solo miner">Solo</span>';
     else

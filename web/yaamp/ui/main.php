@@ -21,6 +21,7 @@ echo <<<END
 <head>
 
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
@@ -34,15 +35,8 @@ if ( YAAMP_ADIM_LTE )
   echo <<<END
    <!-- Google Font: Source Sans Pro -->
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-   <!-- Font Awesome Icons -->
-   <link rel="stylesheet" href="/yaamp/AdminLTE/plugins/fontawesome-free/css/all.min.css">
    <!-- IonIcons -->
    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-   <!-- overlayScrollbars -->
-   <link rel="stylesheet" href="/yaamp/AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-   <!-- Theme style -->
-   <link rel="stylesheet" href="/yaamp/AdminLTE/dist/css/adminlte.min.css">
-
   END;
 }
 
@@ -50,9 +44,23 @@ $pageTitle = empty($this->pageTitle) ? YAAMP_SITE_NAME : YAAMP_SITE_NAME . " - "
 
 echo '<title>' . $pageTitle . '</title>';
 
+
+if ( YAAMP_ADIM_LTE )
+{
+    echo CHtml::cssFile('/yaamp/AdminLTE/plugins/fontawesome-free/css/all.min.css');
+    echo CHtml::cssFile('/yaamp/AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css');
+    echo CHtml::cssFile('/yaamp/AdminLTE/dist/css/adminlte.min.css');
+}
+else
+{
+    echo CHtml::cssFile("/extensions/jquery/themes/ui-lightness/jquery-ui.css");
+    echo CHtml::cssFile('/yaamp/ui/css/main.css');
+    echo CHtml::cssFile('/yaamp/ui/css/table.css');
+}
+/*
 echo CHtml::cssFile("/extensions/jquery/themes/ui-lightness/jquery-ui.css");
 echo CHtml::cssFile('/yaamp/ui/css/main.css');
-echo CHtml::cssFile('/yaamp/ui/css/table.css');
+echo CHtml::cssFile('/yaamp/ui/css/table.css');*/
 
 //echo CHtml::scriptFile('/extensions/jquery/js/jquery-1.8.3-dev.js');
 //echo CHtml::scriptFile('/extensions/jquery/js/jquery-ui-1.9.1.custom.min.js');
