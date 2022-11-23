@@ -60,4 +60,31 @@ function openCard($card, $title){
         <div class="card-body p-0">';    
     }
 
+function ProgressBars ($posicion, $tipo, $txt, $datos=array(), $porcentaje) 
+{
+
+      if($posicion=='horizontal' && $tipo == 1){
+        echo '<div class="progress">
+                <div class="progress-bar bg-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: '.$porcentaje.'%">
+                  <span class="sr-only">40% Complete (success)</span>
+                </div>
+              </div>';
+      }
+      
+      if($porcentaje <=59 ){$bg="bg-warning";} else if ($porcentaje <=60){$bg="bg-primary";
+      } else if ($porcentaje >= 99){$bg="bg-success";}else {$bg="bg-primary";}
+    
+      if($posicion=='horizontal' && $tipo == 2){
+        echo '<div class="progress-group">
+               <span class="progress-text">'.$txt.'&nbsp;</span>
+                <span class="float-right"><b> '.$datos[0].'</b>/'.$datos[1].'</span>
+                <div class="progress progress-sm">
+                 <div class="progress-bar '.$bg.'" style="width: '.$porcentaje.'%"></div>
+                </div>
+              </div>';
+      }
+    
+     //return $dato;
+}
+
 ?>
