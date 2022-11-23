@@ -3,13 +3,6 @@
 if ( YAAMP_ADIM_LTE )
      include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
 
-/*function WriteBoxHeader($title)
-{
-    echo "<div class='main-left-box'>";
-    echo "<div class='main-left-title'>$title</div>";
-    echo "<div class='main-left-inner'>";
-}*/
-
 $showrental = (bool) YAAMP_RENTAL;
 
 $algo = user()->getState('yaamp-algo');
@@ -44,34 +37,25 @@ else
 
 $coin_count  = $count > 1 ? "on $count wallets" : 'on a single wallet';
 $miner_count = $worker > 1 ? "$worker miners" : "$worker miner";
-//WriteBoxHeader("Mining $coin_count $total_rate_d, $miner_count");
-openCard('card-primary','Mining '.$coin_count.' '.$total_rate_d.', '.$miner_count);
-//echo '<div class="card-body table-responsive p-0">';
-/*
-showTableSorter('maintable3', "{
-    tableClass: 'dataGrid2',
-    textExtraction: {
-        3: function(node, table, n) { return $(node).attr('data'); },
-        6: function(node, table, n) { return $(node).attr('data'); },
-        7: function(node, table, n) { return $(node).attr('data'); }
-    }
-}");*/
 
-echo <<<END
+openCard('card-primary','Mining '.$coin_count.' '.$total_rate_d.', '.$miner_count);
+?>
+
 <table class="table table-hover text-nowrap">
-<thead>
-<tr>
-<th data-sorter=""></th>
-<th data-sorter="text">Name</th>
-<th align="right">Amount</th>
-<th data-sorter="numeric" align="right">Diff</th>
-<th align="right">Block</th>
-<th align="right">TTF***</th>
-<th data-sorter="numeric" align="right">Hash**</th>
-<th data-sorter="currency" align="right">Profit*</th>
-</tr>
-</thead>
-END;
+    <thead>
+        <tr>
+            <th data-sorter=""></th>
+            <th data-sorter="text">Name</th>
+            <th align="right">Amount</th>
+            <th data-sorter="numeric" align="right">Diff</th>
+            <th align="right">Block</th>
+            <th align="right">TTF***</th>
+            <th data-sorter="numeric" align="right">Hash**</th>
+            <th data-sorter="currency" align="right">Profit*</th>
+        </tr>
+    </thead>
+
+<?php
 
 if ($algo != 'all' && $showrental) {
     $hashrate_jobs = yaamp_rented_rate($algo);
@@ -143,7 +127,7 @@ foreach ($list as $coin) {
                 continue;
             $service_btcmhd = mbitcoinvaluetoa($service->price * 1000);
 
-            echo "<tr class='ssrow'>";
+            echo "<tr>";
             echo "<td width=18><img width=16 src='/images/btc.png'></td>";
             echo "<td><b>$service->name</b></td>";
             echo "<td></td>";
@@ -151,7 +135,7 @@ foreach ($list as $coin) {
             echo "<td></td>";
             echo "<td></td>";
             echo "<td></td>";
-            echo "<td align=right style='font-size: .8em;'><b>$service_btcmhd</b></td>";
+            echo "<td style='font-size: .8em;'><b>$service_btcmhd</b></td>";
             echo "</tr>";
 
             unset($services[$i]);
@@ -162,12 +146,12 @@ foreach ($list as $coin) {
         echo "<tr class='ssrow'>";
         echo "<td width=18><img width=16 src='/images/btc.png'></td>";
         echo "<td><b>Rental</b></td>";
-        echo "<td align=right style='font-size: .8em;'><b>$amount_rent BTC</b></td>";
+        echo "<td style='font-size: .8em;'><b>$amount_rent BTC</b></td>";
         echo "<td></td>";
         echo "<td></td>";
         echo "<td></td>";
-        echo "<td align=right style='font-size: .8em;'>$hashrate_jobs</td>";
-        echo "<td align=right style='font-size: .8em;'><b>$price_rent</b></td>";
+        echo "<td style='font-size: .8em;'>$hashrate_jobs</td>";
+        echo "<td style='font-size: .8em;'><b>$price_rent</b></td>";
         echo "</tr>";
 
         unset($price_rent);
@@ -191,21 +175,21 @@ foreach ($list as $coin) {
     } else {
         echo "<td><b><a href='/site/block?id=$coin->id'>$name</a></b><span style='font-size: .8em'> ($coin->algo)</span></td>";
     }
-    echo "<td align=right style='font-size: .8em;'><b>$reward $coin->symbol_show</b></td>";
+    echo "<td style='font-size: .8em;'><b>$reward $coin->symbol_show</b></td>";
 
     $title = "POW $coin->difficulty";
     if ($coin->rpcencoding == 'POS')
         $title .= "\nPOS $coin->difficulty_pos";
 
-    echo '<td align="right" style="font-size: .8em;" data="' . $coin->difficulty . '" title="' . $title . '">' . $difficulty . '</td>';
+    echo '<td style="font-size: .8em;" data="' . $coin->difficulty . '" title="' . $title . '">' . $difficulty . '</td>';
 
     if (!empty($coin->errors))
-        echo "<td align=right style='font-size: .8em; color: red;' title='$coin->errors'>$height</td>";
+        echo "<td style='font-size: .8em; color: red;' title='$coin->errors'>$height</td>";
     else
-        echo "<td align=right style='font-size: .8em;'>$height</td>";
+        echo "<td style='font-size: .8em;'>$height</td>";
 
     if (!YAAMP_ALLOW_EXCHANGE && !empty($real_ttf))
-        echo '<td align="right" style="font-size: .8em;" title="' . $pool_ttf . ' at full pool speed">' . $real_ttf . '</td>';
+        echo '<td style="font-size: .8em;" title="' . $pool_ttf . ' at full pool speed">' . $real_ttf . '</td>';
     elseif (!empty($real_ttf))
         echo '<td align="right" style="font-size: .8em;" title="' . $real_ttf . ' at ' . Itoa2($pool_hash) . '">' . $pool_ttf . '</td>';
     else
