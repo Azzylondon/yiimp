@@ -119,7 +119,7 @@ foreach ($db_blocks as $db_block)
 
     if ( YAAMP_ADIM_LTE )
     {
-    echo '<tr class="ssrow">';
+    echo '<tr>';
     echo '<td width="18px"><img width="16px" src="'.$coin->image.'"></td>';
     //echo '<td class="row"><b class="row">'.$link.'</b> ('.$db_block->algo.')'.$flags.'</td>';
     echo '<td>'.$link.'</b> ('.$db_block->algo.')'.$flags.'</td>';
@@ -155,17 +155,17 @@ foreach ($db_blocks as $db_block)
     }
     echo "</td>";
 
-    echo '<td class="row right">';
+    echo '<td>';
     if ($db_block->category == 'orphan')
     {
         /*
         42Coin Hide orphaned blocks and suptituri per block without reward
-        42Coin Ocultar bloques huerfanos y suptituri por bloque sin recompensa 
+        42Coin Ocultar bloques huerfanos y suptituri por bloque sin recompensa
         */
         if ($coin->symbol == 'C42' || $coin->symbol == '42')
-             echo '<span class="block confirmed">No Reward</span>';
-        else 
-            echo '<span class="block orphan">Orphan</span>';
+             echo '<span class="badge bg-success">No Reward</span>';
+        else
+            echo '<span class="badge bg-danger">Orphan</span>';
     }
     else if ($db_block->category == 'immature')
     {
@@ -177,7 +177,7 @@ foreach ($db_blocks as $db_block)
         }
         //echo '<span class="block immature" title="' . $eta . '">Immature (' . $db_block->confirmations . ')</span>';
         $datos = array($db_block->confirmations, $coin->mature_blocks);
-        ProgressBars ('horizontal', 2, 'Immature ', $datos, $db_block->confirmations);
+        ProgressBars ('horizontal', 2, 'Immature', $datos, $db_block->confirmations);
     }
     else if ($db_block->category == 'generate')
     {
@@ -197,3 +197,4 @@ foreach ($db_blocks as $db_block)
 echo "</table>";
 
 echo "<br></div></div><br>";
+echo '<div>';// card-body table-responsive p-0
