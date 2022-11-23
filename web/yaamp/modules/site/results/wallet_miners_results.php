@@ -1,4 +1,7 @@
 <?php
+
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
+
 $user = getuserparam(getparam('address'));
 if (!$user) return;
 
@@ -9,11 +12,9 @@ if ($coinid)
     $coin = getdbo('db_coins', $coinid);
 }
 
-echo "<div class='main-left-box'>";
-echo "<div class='main-left-title'>Miners: {$user->username}</div>";
-echo "<div class='main-left-inner'>";
+openCard('card-primary','Miners: ('.$user->username.')');
 
-echo '<table class="dataGrid2">';
+echo '<table class="table table-striped>';
 echo "<thead>";
 echo "<tr>";
 echo "<th align=left>Summary</th>";
