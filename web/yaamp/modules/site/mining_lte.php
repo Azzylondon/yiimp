@@ -29,25 +29,18 @@ openMainContent();
 
 		echo <<<end
 		<div id='mining_results'>
-		<br><br><br><br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br><br><br><br>
+		<br>
 		</div>
 		end;
 
 		if($algo != 'all')
-		echo <<<end
-		<div class="main-left-box">
-		<div class="main-left-title">Last 24 Hours Estimate ($algo)</div>
-		<div class="main-left-inner"><br>
-		<div id='graph_results_price' style='height: $height;'></div><br>
-		</div></div><br>
+		{
+		openCard('card-primary','Last 24 Hours Estimate '.$algo);
+		echo'<div id="graph_results_price" style="height: $height;"></div></div></div><br>';
 
-		<div class="main-left-box">
-		<div class="main-left-title">Last 24 Hours Hashrate ($algo)</div>
-		<div class="main-left-inner"><br>
-		<div id='pool_hashrate_results' style='height: $height;'></div><br>
-		</div></div><br>
-		end;
+		openCard('card-primary','Last 24 Hours Hashrate '.$algo);
+		echo '<div id="pool_hashrate_results" style="height: $height;"></div></div></div><br>';
+		}
 
 		$algo_unit = 'Mh';
 		$algo_factor = yaamp_algo_mBTC_factor($algo);
@@ -61,21 +54,11 @@ openMainContent();
    </div> <!-- col-lg-6 close -->
   <div class="col-lg-6">
 
-		<div id='pool_current_results'>
-		<br><br><br><br><br><br><br><br><br><br>
-		</div>
+		<div id='pool_current_results'><br></div>
 
-		<div id='found_results'>
-		<br><br><br><br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br><br><br><br>
-		</div>
-
-		<br><br><br><br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br><br><br><br>
-
-	</div> <!-- col-lg-6 close -->
+		<div id='found_results'><br></div>
+		<br>
+ </div> <!-- col-lg-6 close -->
 </div> <!-- row close -->
 
 <?php
