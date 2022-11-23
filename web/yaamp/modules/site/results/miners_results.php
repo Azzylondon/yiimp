@@ -1,11 +1,6 @@
 <?php
 
-function WriteBoxHeader($title)
-{
-    echo "<div class='main-left-box'>";
-    echo "<div class='main-left-title'>$title</div>";
-    echo "<div class='main-left-inner'>";
-}
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
 
 $algo = user()->getState('yaamp-algo');
 
@@ -30,22 +25,22 @@ $total_invalid    = !$this->admin ? 0 : controller()->memcache->get_database_sca
     ':algo' => $algo
 ));
 
-WriteBoxHeader("Miners Version ($algo)");
+openCard('card-primary','Version ($algo)');
 
 //showTableSorter('maintable2');
 echo <<<end
 <br/>
-<table id="maintable2" class="dataGrid2">
+<table id="maintable2" class="table table-striped">
 <thead>
 <tr>
 <th>Version</th>
-<th align="right">Count</th>
-<th align="right">Donators</th>
-<th align="right" title="* Extranonce Subscribe">ES</th>
-<th align="right">Percent</th>
-<th align="right">Hashrate*</th>
-<th align="right" title="Rate per miner">Avg</th>
-<th align="right" class="rejects" style="display:none;">Reject</th>
+<th>Count</th>
+<th>Donators</th>
+<th title="* Extranonce Subscribe">ES</th>
+<th>Percent</th>
+<th>Hashrate*</th>
+<th title="Rate per miner">Avg</th>
+<th class="rejects" style="display:none;">Reject</th>
 </tr>
 </thead><tbody>
 end;
@@ -119,16 +114,16 @@ foreach ($versions as $item) {
 
     echo '<tr class="ssrow">';
     echo '<td><b>' . $version . '</b></td>';
-    echo '<td align="right">' . $count . '</td>';
-    echo '<td align="right">' . ($donators ? $donators : '-') . '</td>';
-    echo '<td align="right">' . ($extranonce ? $extranonce : '-') . '</td>';
+    echo '<td>' . $count . '</td>';
+    echo '<td>' . ($donators ? $donators : '-') . '</td>';
+    echo '<td>' . ($extranonce ? $extranonce : '-') . '</td>';
     if (floatval($percent) > 50)
-        echo '<td align="right"><b>' . $percent . '</b></td>';
+        echo '<td><b>' . $percent . '</b></td>';
     else
-        echo '<td align="right">' . $percent . '</td>';
-    echo '<td align="right">' . $hashrate . '</td>';
-    echo '<td align="right">' . $avg . '</td>';
-    echo '<td align="right" class="rejects" style="display:none;" title="' . $title . '">' . $bad . '</td>';
+        echo '<td>' . $percent . '</td>';
+    echo '<td>' . $hashrate . '</td>';
+    echo '<td>' . $avg . '</td>';
+    echo '<td class="rejects" style="display:none;" title="' . $title . '">' . $bad . '</td>';
     echo '</tr>';
 }
 
@@ -152,22 +147,22 @@ $total_hashrate = Itoa2($total_hashrate) . 'H/s';
 
 echo '<tr class="ssrow">';
 echo '<th><b>Total</b></th>';
-echo '<th align="right">' . $total_workers . '</th>';
-echo '<th align="right">' . $total_donators . '</th>';
-echo '<th align="right">' . $total_extranonce . '</th>';
-echo '<th align="right"></th>';
-echo '<th align="right">' . $total_hashrate . '</th>';
-echo '<th align="right">' . $avg . '</th>';
-echo '<th align="right" title="' . $title . '" class="rejects" style="display:none;">' . $bad . '</th>';
+echo '<t>' . $total_workers . '</th>';
+echo '<th>' . $total_donators . '</th>';
+echo '<th>' . $total_extranonce . '</th>';
+echo '<th></th>';
+echo '<th>' . $total_hashrate . '</th>';
+echo '<th>' . $avg . '</th>';
+echo '<th title="' . $title . '" class="rejects" style="display:none;">' . $bad . '</th>';
 echo '</tr>';
 
-echo "</table>";
+echo "</table><br>";
 
 echo "<p style='font-size: .8em'>
         &nbsp;* approximate from the last 5 minutes submitted shares<br>
         </p>";
 
-echo "<br></div></div><br>";
+echo "<br></div><br>";
 
 if ($this->admin) {
     // show reject column

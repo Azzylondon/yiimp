@@ -36,11 +36,6 @@ openMainContent();
     <div id='pool_current_results'>
      <br><br><br><br><br><br><br><br><br><br>
     </div>
-
-    <br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br>
     
   </div> <!-- col-lg-6 close -->
 </div> <!-- row close -->
