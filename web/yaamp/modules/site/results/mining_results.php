@@ -1,11 +1,14 @@
 <?php
 
-function WriteBoxHeader($title)
+if ( YAAMP_ADIM_LTE )
+     include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
+
+/*function WriteBoxHeader($title)
 {
     echo "<div class='main-left-box'>";
     echo "<div class='main-left-title'>$title</div>";
     echo "<div class='main-left-inner'>";
-}
+}*/
 
 $showrental = (bool) YAAMP_RENTAL;
 
@@ -41,8 +44,10 @@ else
 
 $coin_count  = $count > 1 ? "on $count wallets" : 'on a single wallet';
 $miner_count = $worker > 1 ? "$worker miners" : "$worker miner";
-WriteBoxHeader("Mining $coin_count $total_rate_d, $miner_count");
-
+//WriteBoxHeader("Mining $coin_count $total_rate_d, $miner_count");
+openCard('card-primary','Mining '.$coin_count.' '.$total_rate_d.', '.$miner_count);
+//echo '<div class="card-body table-responsive p-0">';
+/*
 showTableSorter('maintable3', "{
     tableClass: 'dataGrid2',
     textExtraction: {
@@ -50,9 +55,10 @@ showTableSorter('maintable3', "{
         6: function(node, table, n) { return $(node).attr('data'); },
         7: function(node, table, n) { return $(node).attr('data'); }
     }
-}");
+}");*/
 
 echo <<<END
+<table class="table table-hover text-nowrap">
 <thead>
 <tr>
 <th data-sorter=""></th>
@@ -250,10 +256,11 @@ if (isset($price_rent) && $showrental) {
 
 echo "</table>";
 
-echo '<p style="font-size: .8em;">
-    &nbsp;*** estimated average time to find a block at full pool speed<br/>
-    &nbsp;** approximate from the last 5 minutes submitted shares<br/>
-    &nbsp;* 24h estimation from net difficulty in mBTC/MH/day (GH/day for sha & blake algos)<br>
-</p>';
+echo '<br><p style="font-size: .8em;">
+      &nbsp;*** estimated average time to find a block at full pool speed<br/>
+      &nbsp;** approximate from the last 5 minutes submitted shares<br/>
+      &nbsp;* 24h estimation from net difficulty in mBTC/MH/day (GH/day for sha & blake algos)<br>
+      </p>';
 
 echo "</div></div><br>";
+

@@ -146,12 +146,12 @@ foreach ($db_blocks as $db_block)
     if($db_block->solo == '1')
     {
         //echo '<span class="solo" title="Block was found by solo miner">Solo</span>';
-        echo '<span class="badge badge-info" title="Block was found by solo miner"><span class="fas fa-user"> Solo</span></span>';
+        echo '<span class="badge bg-primary" title="Block was found by solo miner"><span class="fas fa-user"> &nbsp;&nbsp;&nbsp; SOLO &nbsp;&nbsp;&nbsp; </span></span>';
     }
     else
     {
         //echo '<span class="shared" title="Block was found by shared miners">Shared</span>';
-        echo '<span class="badge badge-info" title="Block was found by shared miners"><span class="fas fa-users"> Shared</span></span>';
+        echo '<span class="badge badge-info" title="Block was found by shared miners"><span class="fas fa-users"> SHARED</span></span>';
     }
     echo "</td>";
 
@@ -184,7 +184,7 @@ foreach ($db_blocks as $db_block)
         //echo '<span class="block confirmed">Confirmed</span>';
         echo '<span class="badge bg-success">Confirmed</span>';
     }
-    else if ($db_block->category == 'new') 
+    else if ($db_block->category == 'new')
     {
         //echo '<span class="block new">New</span>';
         echo '<span class="badge bg-primary">New</span>';
