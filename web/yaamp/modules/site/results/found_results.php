@@ -73,12 +73,12 @@ td.right { text-align: right; }
 <tr>
 <td></td>
 <th>Name</th>
-<th align="right">Amount</th>
-<th align="right">Difficulty</th>
-<th align="right">Block</th>
-<th align="right">Time</th>
-<th align="right">Type</th>
-<th align="right">Status</th>
+<th>Amount</th>
+<th>Difficulty</th>
+<th>Block</th>
+<th>Time</th>
+<th>Type</th>
+<th>Status</th>
 </tr>
 </thead>
 EOT;
@@ -126,7 +126,7 @@ foreach ($db_blocks as $db_block)
     echo '<td><b>'.$reward.' '.$coin->symbol_show.'</b></td>';
     echo '<td title="found '.$db_block->difficulty_user.'">'.$difficulty.'</td>';
     echo '<td>'.$height.'</td>';
-    echo '<td>hace '.$d.'</td>';
+    echo '<td>'.$d.' ago</td>';
     echo '<td></th>';
     echo '<td">';
     }
@@ -143,10 +143,16 @@ foreach ($db_blocks as $db_block)
     }
 
 
-    if($db_block->solo == '1') 
-	    echo '<span class="solo" title="Block was found by solo miner">Solo</span>';
+    if($db_block->solo == '1')
+    {
+        //echo '<span class="solo" title="Block was found by solo miner">Solo</span>';
+        echo '<span class="badge badge-info" title="Block was found by solo miner"><span class="fas fa-user"> Solo</span></span>';
+    }
     else
-            echo '<span class="shared" title="Block was found by shared miners">Shared</span>';
+    {
+        //echo '<span class="shared" title="Block was found by shared miners">Shared</span>';
+        echo '<span class="badge badge-info" title="Block was found by shared miners"><span class="fas fa-users"> Shared</span></span>';
+    }
     echo "</td>";
 
     echo '<td class="row right">';
@@ -171,11 +177,18 @@ foreach ($db_blocks as $db_block)
         }
         //echo '<span class="block immature" title="' . $eta . '">Immature (' . $db_block->confirmations . ')</span>';
         $datos = array($db_block->confirmations, $coin->mature_blocks);
-        ProgressBars ('horizontal', 2, ' Immature ', $datos, $db_block->confirmations);
+        ProgressBars ('horizontal', 2, 'Immature ', $datos, $db_block->confirmations);
     }
-    else if ($db_block->category == 'generate') echo '<span class="block confirmed">Confirmed</span>';
-
-    else if ($db_block->category == 'new') echo '<span class="block new">New</span>';
+    else if ($db_block->category == 'generate')
+    {
+        //echo '<span class="block confirmed">Confirmed</span>';
+        echo '<span class="badge bg-success">Confirmed</span>';
+    }
+    else if ($db_block->category == 'new') 
+    {
+        //echo '<span class="block new">New</span>';
+        echo '<span class="badge bg-primary">New</span>';
+    }
 
     echo "</td>";
     echo "</tr>";
