@@ -1,10 +1,4 @@
 <?php
-function WriteBoxHeader($title)
-{
-    echo "<div class='main-left-box'>";
-    echo "<div class='main-left-title'>$title</div>";
-    echo "<div class='main-left-inner'>";
-}
 
 $showrental = (bool)YAAMP_RENTAL;
 
@@ -34,7 +28,7 @@ $count = getparam('count');
 $count = $count ? $count : 50;
 
 $algo_header = isset($r_algo) ? implode(',', $r_algo) : 'any algo';
-WriteBoxHeader("Last $count Blocks ($algo_header)");
+
 
 $criteria = new CDbCriteria();
 $criteria->condition = "t.category NOT IN ('stake','generated')";
@@ -47,10 +41,9 @@ $criteria->limit = $count;
 $criteria->order = 't.time DESC';
 $db_blocks = getdbolistWith('db_blocks', 'coin', $criteria);
 
-if ( YAAMP_ADIM_LTE )
-    $claasTabla='table table-hover text-nowrap';
-else
-    $claasTabla='dataGrid2';
+openCard('card-primary',"Last $count Blocks ($algo_header)");
+
+echo '<div class="card-body table-responsive p-0">';
 
 echo <<<EOT
 
@@ -68,7 +61,7 @@ b.row a { font-size: 10pt; }
 td.right { text-align: right; }
 </style>
 
-<table class="{$claasTabla}">
+<table class="table table-hover text-nowrap">
 <thead>
 <tr>
 <td></td>
@@ -117,8 +110,6 @@ foreach ($db_blocks as $db_block)
 
     $flags = $db_block->segwit ? '&nbsp;<img src="/images/ui/segwit.png" height="8px" valign="center" title="segwit"/>' : '';
 
-    if ( YAAMP_ADIM_LTE )
-    {
     echo '<tr>';
     echo '<td width="18px"><img width="16px" src="'.$coin->image.'"></td>';
     //echo '<td class="row"><b class="row">'.$link.'</b> ('.$db_block->algo.')'.$flags.'</td>';
@@ -129,19 +120,6 @@ foreach ($db_blocks as $db_block)
     echo '<td>'.$d.' ago</td>';
     echo '<td></th>';
     echo '<td">';
-    }
-    else
-    {
-        echo '<tr class="ssrow">';
-        echo '<td width="18px"><img width="16px" src="' . $coin->image . '"></td>';
-        echo '<td class="row"><b class="row">' . $link . '</b> (' . $db_block->algo . ')' . $flags . '</td>';
-        echo '<td class="row right"><b>' . $reward . ' ' . $coin->symbol_show . '</b></td>';
-        echo '<td class="row right" title="found ' . $db_block->difficulty_user . '">' . $difficulty . '</td>';
-        echo '<td class="row right">' . $height . '</td>';
-        echo '<td class="row right">' . $d . ' ago</td>';
-        echo '<td class="row right">';
-    }
-
 
     if($db_block->solo == '1')
     {
