@@ -86,18 +86,21 @@ openMainContent();
 	</div>
 	END;
 
-	if($user) echo <<<END
-	<div class="main-left-box">
-	<div class="main-left-title">Last 24 Hours Balance: $user->username</div>
-	<div class="main-left-inner"><br>
-	<div id='graph_earnings_results' style='height: 240px;'></div>
-	<div style='float: right;'>
-	<span style='font-size: .8em; color: #4bb2c5;'>Balance</span>
-	<span style='font-size: .8em; color: #eaa228;'>Pending</span>
-	</div>
-	<br>
-	</div></div><br>
-	END;
+	if($user)
+	{
+		openCard('card-primary','Last 24 Hours Balance: '.$user->username);
+
+		echo <<<END
+		<div id='graph_earnings_results' style='height: 240px;'></div>
+		<div style='float: right;'>
+		<span style='font-size: .8em; color: #4bb2c5;'>Balance</span>
+		<span style='font-size: .8em; color: #eaa228;'>Pending</span>
+		</div>
+		<br>
+		</div></div><br>
+		END;
+	} 
+
 
 	if($user) echo <<<END
 	<div id='main_graphs_results'>
@@ -121,7 +124,6 @@ openMainContent();
 	END;
 
 	openCard('card-primary','Search Wallet:');
-
 	echo <<<END
 	<form action="/" method="get" style="padding: 10px;">
 	<input type="text" name="address" class="form-control form-control-lg" placeholder="Wallet Address">
