@@ -1,5 +1,7 @@
 <?php
 
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
+
 JavascriptFile("/extensions/jqplot/jquery.jqplot.js");
 JavascriptFile("/extensions/jqplot/plugins/jqplot.dateAxisRenderer.js");
 JavascriptFile("/extensions/jqplot/plugins/jqplot.barRenderer.js");
@@ -118,13 +120,12 @@ openMainContent();
 	</div>
 	END;
 
+	openCard('card-primary','Search Wallet:');
+
 	echo <<<END
-	<div class="main-left-box">
-	<div class="main-left-title">Search Wallet:</div>
-	<div class="main-left-inner">
 	<form action="/" method="get" style="padding: 10px;">
-	<input type="text" name="address" class="main-text-input" placeholder="Wallet Address">
-	<input type="submit" value="Submit" class="main-submit-button" ><br><br>
+	<input type="text" name="address" class="form-control form-control-lg" placeholder="Wallet Address">
+	<input type="submit" value="Submit" class="btn btn-block btn-secondary btn-lg" ><br><br>
 	END;
 
 	echo "<table class='dataGrid2'>";
