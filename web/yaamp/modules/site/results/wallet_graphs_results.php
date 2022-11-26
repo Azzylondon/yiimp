@@ -1,13 +1,12 @@
 <?php
+
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
+
 $user = getuserparam(getparam('address'));
 if (!$user) return;
 
-echo <<<end
-<div class="main-left-box">
-<div class="main-left-title">Last 24 Hours Hashrate: $user->username</div>
-<div class="main-left-inner"><br>
-end;
-
+openCard('card-primary',"Last 24 Hours Hashrate: $user->username");
+echo '<div class="card-body table-responsive p-0">';
 
 foreach (yaamp_get_algos() as $algo)
 {
