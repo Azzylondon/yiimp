@@ -26,6 +26,7 @@ $total_invalid    = !$this->admin ? 0 : controller()->memcache->get_database_sca
 ));
 
 openCard('card-primary','Version ($algo)');
+echo '<div class="card-body table-responsive p-0">';
 
 //showTableSorter('maintable2');
 echo <<<end
@@ -156,6 +157,7 @@ echo '<th>' . $avg . '</th>';
 echo '<th title="' . $title . '" class="rejects" style="display:none;">' . $bad . '</th>';
 echo '</tr>';
 
+echo '</div>'; //card-body table-responsive p-0
 echo "</table><br>";
 
 echo "<p style='font-size: .8em'>
