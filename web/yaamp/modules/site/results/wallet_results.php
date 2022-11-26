@@ -14,7 +14,9 @@ $show_details = getparam('showdetails');
 $user = getuserparam(getparam('address'));
 if (!$user) return;
 
-WriteBoxHeader("Wallet: $user->username");
+//WriteBoxHeader("Wallet: $user->username");
+openCard('card-primary','Miners: ('.$user->username.')');
+echo '<div class="card-body table-responsive p-0">';
 
 $refcoin = getdbo('db_coins', $user->coinid);
 if (!$refcoin)
