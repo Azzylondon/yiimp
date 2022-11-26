@@ -1,45 +1,29 @@
 <?php
 
-if ( YAAMP_ADIM_LTE )
-     include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
 
 $defaultalgo = user()->getState('yaamp-algo');
 
-if ( YAAMP_ADIM_LTE )
-{
-  openCard('card-primary','Pool Status');
-  echo '<div class="card-body table-responsive p-0">'; 
-}
-else
-{
-  echo "<div class='main-left-box'>";
-  echo "<div class='main-left-title'>Pool Status</div>";
-  echo "<div class='main-left-inner'>";
-}
+openCard('card-primary','Pool Status');
+echo '<div class="card-body table-responsive p-0">'; 
 
-showTableSorter('maintable1', "{
-    tableClass: 'dataGrid2',
-    textExtraction: {
-        4: function(node, table, n) { return $(node).attr('data'); },
-        8: function(node, table, n) { return $(node).attr('data'); }
-    }
-}");
 echo <<<END
+<table class="table table-sm">
 <thead>
 <tr>
 <th>Coins</th>
-<th data-sorter="numeric" style="font-size: .8em" align="center">Auto Exchanged</th>
-<th data-sorter="numeric" style="font-size: .8em" align="center">Port</th>
-<th data-sorter="numeric" style="font-size: .8em" align="center">Users pending payments</th>
-<th data-sorter="numeric" style="font-size: .8em" align="center">Minimum Payment</th>
-<th data-sorter="numeric" style="font-size: .8em" align="center">Miners<br/>Share / Solo</th>
-<th data-sorter="numeric" style="font-size: .8em" align="center">Pool Hashrate</th>
-<th data-sorter="numeric" style="font-size: .8em" align="center">Network Hashrate</th>
-<th data-sorter="currency" align="center">Fees<br/>Share / Solo</th>
+<th>Auto Exchanged</th>
+<th>Port</th>
+<th style="width: 40px" >Users pending payments</th>
+<th>Minimum Payment</th>
+<th>Miners<br/>Share / Solo</th>
+<th>Pool Hashrate</th>
+<th>Network Hashrate</th>
+<th>Fees<br/>Share / Solo</th>
 <!--<th data-sorter="currency" class="estimate" align="right">Current<br />Estimate</th>-->
 <!--<th data-sorter="currency" >Norm</th>-->
 <!--<th data-sorter="currency" class="estimate" align="right">24 Hours<br />Estimated</th>-->
-<th data-sorter="currency" style="font-size: .8em" align="center">24 Hours<br />Actual</th>
+<th>24 Hours<br />Actual</th>
 </tr>
 </thead>
 END;
@@ -291,8 +275,7 @@ echo "</table>";
 echo '<p style="font-size: .8em;">&nbsp;* values in mBTC/MH/day, per GH for sha & blake algos</p>';
 
 echo "</div></div><br />";
-if ( YAAMP_ADIM_LTE )
-    echo '</div>'; //card-body table-responsive p-0
+echo '</div>'; //card-body table-responsive p-0
 ?>
 
 <?php
