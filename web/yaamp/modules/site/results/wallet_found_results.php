@@ -1,5 +1,7 @@
 <?php
 
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
+
 function WriteBoxHeader($title)
 {
 	echo "<div class='main-left-box'>";
@@ -16,7 +18,9 @@ $count = getparam('count');
 $count = $count? $count: 20;
 
 
-WriteBoxHeader("Last $count Blocks found by $user->username");
+//WriteBoxHeader("Last $count Blocks found by $user->username");
+openCard('card-primary',"Last $count Blocks found by ($user->username)");
+echo '<div class="card-body table-responsive p-0">';
 $db_blocks = getdbolist('db_blocks', "userid=$user->id order by time desc limit :count", array(':count'=>$count));
 
 
