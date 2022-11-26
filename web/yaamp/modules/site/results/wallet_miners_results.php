@@ -13,6 +13,7 @@ if ($coinid)
 }
 
 openCard('card-primary','Miners: ('.$user->username.')');
+echo '<div class="card-body table-responsive p-0">';
 
 echo '<table class="table table-striped>';
 echo "<thead>";
@@ -157,5 +158,6 @@ echo "<p style='font-size: .8em'>
 		&nbsp;* approximate from the last 5 minutes submitted shares<br>
 		&nbsp;** extranonce.subscribe<br>
 		</p>";
-
+        
+echo '</div>'; //card-body table-responsive p-0
 echo "</div><br>";
