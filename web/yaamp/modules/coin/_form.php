@@ -1,5 +1,10 @@
 <?php
 
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/content.php";
+
+openMainContent();
+
 echo "<a href='/coin'>Back to coin list</a>";
 
 $this->widget('UniForm');
