@@ -1,5 +1,10 @@
 <?php
 
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/content.php";
+
+openMainContent();
+
 echo getAdminSideBarLinks();
 
 echo <<<end
