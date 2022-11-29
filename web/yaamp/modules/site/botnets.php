@@ -1,4 +1,10 @@
 <?php
+
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/content.php";
+
+openMainContent();
+
 $this->pageTitle = 'Botnets';
 
 echo getAdminSideBarLinks() . '<br/><br/>';
