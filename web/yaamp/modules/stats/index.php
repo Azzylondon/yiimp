@@ -1,4 +1,10 @@
 <?php
+
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/content.php";
+
+openMainContent();
+
 $algo = user()->getState('yaamp-algo');
 $algo_unit = 'Mh';
 $algo_factor = yaamp_algo_mBTC_factor($algo);
@@ -79,7 +85,7 @@ foreach ($enabled as $row)
 $string = '';
 foreach ($algos as $a => $count)
 {
-    if ($a == $algo) $string .= "<option value='$a' selected>$a</option>";
+    if ($a == $algo) $string .= "<option class='form-control' value='$a' selected>$a</option>";
     else $string .= "<option value='$a'>$a</option>";
 }
 
@@ -100,8 +106,11 @@ echo <<<end
 	onclick='auto_page_resume();' align=center>
 	<b>Auto refresh is paused - Click to resume</b></div>
 
-<div align=right>
-Select Algo: <select id='algo_select'>$string</select>&nbsp;
+<div class="form-group">
+  <label>Select algo: </label>
+  <div align=right>
+   <select class='form-control' id='algo_select'>$string</select>&nbsp;
+  </div>
 </div>
 
 <script>
