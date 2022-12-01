@@ -39,6 +39,7 @@ $coin_count  = $count > 1 ? "on $count wallets" : 'on a single wallet';
 $miner_count = $worker > 1 ? "$worker miners" : "$worker miner";
 
 openCard('card-primary','Mining '.$coin_count.' '.$total_rate_d.', '.$miner_count);
+echo '<div class="card-body table-responsive p-0">'; 
 ?>
 
 <table class="table table-hover text-nowrap">
@@ -246,5 +247,5 @@ echo '<br><p style="font-size: .8em;">
       &nbsp;* 24h estimation from net difficulty in mBTC/MH/day (GH/day for sha & blake algos)<br>
       </p>';
 
-echo "</div></div><br>";
+echo "</div></div></div><br>";
 

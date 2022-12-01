@@ -1,4 +1,10 @@
 <?php
+
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/content.php";
+
+openMainContent();
+
 function WriteBoxHeader($title)
 {
     echo "<div class='main-left-box'>";
