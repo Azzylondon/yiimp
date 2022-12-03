@@ -1,10 +1,6 @@
 <?php
-function WriteBoxHeader($title)
-{
-    echo "<div class='main-left-box'>";
-    echo "<div class='main-left-title'>$title</div>";
-    echo "<div class='main-left-inner'>";
-}
+
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
 
 $algo = user()->getState('yaamp-algo');
 
@@ -12,9 +8,11 @@ $user = getuserparam(getparam('address'));
 if (!$user || $user->is_locked) return;
 
 $count = getparam('count');
-$count = $count ? $count : 50;
+$count = $count ? $count : 20;
 
-WriteBoxHeader("Last $count Earnings: $user->username");
+openCard('card-primary',"Last $count Earnings: $user->username");
+echo '<div class="card-body table-responsive p-0">'; 
+
 $earnings = getdbolist('db_earnings', "userid=$user->id order by create_time desc limit :count", array(
     ':count' => $count
 ));
@@ -29,17 +27,17 @@ span.block.exchange { color: white; background-color: #5cb85c; }
 span.block.cleared  { color: white; background-color: gray; }
 </style>
 
-<table class="dataGrid2">
+<table class="table table-sm">
 <thead>
 <tr>
 <td></td>
 <th>Name</th>
-<th align=right>Block</th>
-<th align=right>Amount</th>
-<th align=right>Percent</th>
-<th align=right>mBTC</th>
-<th align=right>Time</th>
-<th align=right>Status</th>
+<th>Block</th>
+<th>Amount</th>
+<th>Percent</th>
+<th>mBTC</th>
+<th>Time</th>
+<th>Status</th>
 </tr>
 </thead>
 
@@ -70,11 +68,11 @@ foreach ($earnings as $earning)
         echo '<tr class="ssrow">';
         echo '<td width="18"><img width="16" src="/images/btc.png"></td>';
         echo '<td><b>Rental</b><span style="font-size: .8em;"> (' . $block->algo . ')</span></td>';
-        echo '<td align="right" style="font-size: .8em;"><b>' . $reward . ' BTC</b></td>';
-        echo '<td align="right" style="font-size: .8em;">' . $percent . '%</td>';
-        echo '<td align="right" style="font-size: .8em;">' . $value . '</td>';
-        echo '<td align="right" style="font-size: .8em;">' . $d . '&nbsp;ago</td>';
-        echo '<td align="right" style="font-size: .8em;"><span class="block cleared">Cleared</span></td>';
+        echo '<td style="font-size: .8em;"><b>' . $reward . ' BTC</b></td>';
+        echo '<td style="font-size: .8em;">' . $percent . '%</td>';
+        echo '<td style="font-size: .8em;">' . $value . '</td>';
+        echo '<td style="font-size: .8em;">' . $d . '&nbsp;ago</td>';
+        echo '<td style="font-size: .8em;"><span class="block cleared">Cleared</span></td>';
         echo '</tr>';
 
         continue;
@@ -91,12 +89,12 @@ foreach ($earnings as $earning)
     echo '<tr class="ssrow">';
     echo '<td width="18"><img width="16" src="' . $coin->image . '"></td>';
     echo '<td><b>' . $blockUrl . '</b><span style="font-size: .8em;"> (' . $coin->algo . ')</span></td>';
-    echo '<td align="right" style="font-size: .8em;">'.$height.'</td>';
-    echo '<td align="right" style="font-size: .8em;"><b>' . $reward . ' ' . $coin->symbol_show . '</b></td>';
-    echo '<td align="right" style="font-size: .8em;">' . $percent . '%</td>';
-    echo '<td align="right" style="font-size: .8em;">' . $value . '</td>';
-    echo '<td align="right" style="font-size: .8em;">' . $d . '&nbsp;ago</td>';
-    echo '<td align="right" style="font-size: .8em;">';
+    echo '<td style="font-size: .8em;">'.$height.'</td>';
+    echo '<td style="font-size: .8em;"><b>' . $reward . ' ' . $coin->symbol_show . '</b></td>';
+    echo '<td style="font-size: .8em;">' . $percent . '%</td>';
+    echo '<td style="font-size: .8em;">' . $value . '</td>';
+    echo '<td style="font-size: .8em;">' . $d . '&nbsp;ago</td>';
+    echo '<td style="font-size: .8em;">';
 
     if ($earning->status == 0)
     {
@@ -107,6 +105,8 @@ foreach ($earnings as $earning)
             $eta = "ETA: " . sprintf('%dh %02dmn', ($t / 3600) , ($t / 60) % 60);
         }
         echo '<span class="block immature" title="'.$eta.'">Immature ('.$block->confirmations.'/'.$coin->mature_blocks.')</span>';
+        $datos = array($block->confirmations, $coin->mature_blocks);
+        ProgressBars ('horizontal', 2, 'Immature', $datos, $block->confirmations);
     }
 
     else if ($earning->status == 1) echo '<span class="block exchange">' . (YAAMP_ALLOW_EXCHANGE ? 'Exchange' : 'Confirmed') . '</span>';
