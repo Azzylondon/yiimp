@@ -75,8 +75,6 @@ openMainContent();
   </div>
   <!-- ./Auto Refresh -->
 
-
-
 if($user) echo <<<END
 <div id='main_wallet_results'>
 <br><br><br><br><br><br><br><br><br><br>
@@ -92,7 +90,7 @@ END;
 
 	if($user)
 	{
-		openCard('card-primary','Last 24 Hours Balance: '.$user->username);
+		openCard('card-primary','Last 24 Hours Balance: ');
 
 		echo <<<END
 		<div id='graph_earnings_results' style='height: 240px;'></div>
