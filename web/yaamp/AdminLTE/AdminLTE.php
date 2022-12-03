@@ -1,6 +1,9 @@
 <?php
 
-class AdminLTE 
+include "function.php";
+include "content.php";
+
+class adminLTE 
 {
   //public $card;
 
