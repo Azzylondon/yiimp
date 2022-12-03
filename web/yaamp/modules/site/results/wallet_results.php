@@ -188,8 +188,8 @@ if ($refcoin->symbol == 'BTC')
                 <span class="info-box-text">Minimum payout for this wallet is</span>
                 <span class="info-box-number">
                   <?php
-                    $datos = array( ( $balance + $unconfirmed ) , $refcoin->payout_min);
-                    ProgressBars ('horizontal', 2, '%', $datos, ( $balance + $unconfirmed ) );
+                    $datos = array( $total_unpaid , $refcoin->payout_min);
+                    ProgressBars ('horizontal', 2, '%', $datos, $total_unpaid );
                   ?>
                 </span>
               </div>
