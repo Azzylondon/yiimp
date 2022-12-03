@@ -48,11 +48,6 @@ echo CHtml::cssFile("/extensions/jquery/themes/ui-lightness/jquery-ui.css");
 echo CHtml::cssFile('/yaamp/ui/css/main.css');
 echo CHtml::cssFile('/yaamp/ui/css/table.css');
 
-/*
-echo CHtml::cssFile("/extensions/jquery/themes/ui-lightness/jquery-ui.css");
-echo CHtml::cssFile('/yaamp/ui/css/main.css');
-echo CHtml::cssFile('/yaamp/ui/css/table.css');*/
-
 //echo CHtml::scriptFile('/extensions/jquery/js/jquery-1.8.3-dev.js');
 //echo CHtml::scriptFile('/extensions/jquery/js/jquery-ui-1.9.1.custom.min.js');
 
@@ -100,17 +95,6 @@ echo "</body></html>";
 return;
 
 /////////////////////////////////////////////////////////////////////
-
-function showItemHeader($selected, $url, $name)
-{
-    if ($selected)
-        $selected_text = "class='selected'";
-    else
-        $selected_text = '';
-
-    echo "<span><a $selected_text href='$url'>$name</a></span>";
-    echo "&nbsp;";
-}
 
 function showPageHeader()
 {
