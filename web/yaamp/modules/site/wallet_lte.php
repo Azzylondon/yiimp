@@ -75,53 +75,7 @@ openMainContent();
   </div>
   <!-- ./Auto Refresh -->
 
-<?php
 
-openCard('card-primary','Search Wallet:');
-
-echo <<<END
-<form action="/" method="get" style="padding: 10px;">
-<input type="text" name="address" class="form-control form-control-lg" placeholder="Wallet Address"><br>
-<input type="submit" value="Submit" class="btn btn-block btn-secondary btn-lg" ><br><br>
-END;
-
-echo "<table class='dataGrid2'>";
-foreach($recents as $addr)
-{
-	if(empty($addr)) continue;
-
-	$user = getuserparam($addr);
-	if(!$user) continue;
-
-	$coin = getdbo('db_coins', $user->coinid);
-
-	if($user->username == $username)
-		echo "<tr style='background-color: #41464b;'><td width=24>";
-	else
-		echo "<tr class='ssrow'><td width=24>";
-
-	if($coin)
-		echo '<img width="16px" src="'.$coin->image.'">';
-
-	echo '</td><td><a class="address" href="/?address='.$addr.'" style="font-family: monospace; font-size: 1.1em;">'.
-		$addr.'</a></td>';
-
-	$balance = bitcoinvaluetoa($user->balance);
-
-	if($coin)
-		$balance = $balance>0? "$balance $coin->symbol": '';
-	else
-		$balance = $balance>0? "$balance BTC": '';
-
-	echo '<td align="right">'.$balance.'</td>';
-
-	$delicon = $address == $addr ? '' : '<img src="/images/base/delete.png" onclick="javascript:drop_cookie(this);" style="cursor:pointer;"/>';
-	echo '<td style="width: 16px; max-width: 16px;">'.$delicon.'</td>';
-
-	echo '</tr>';
-}
-
-echo "</table></form></div></div><br>";
 
 if($user) echo <<<END
 <div id='main_wallet_results'>
@@ -190,6 +144,54 @@ END;
 </div> <!-- row close -->
 
 <?php
+
+openCard('card-primary','Search Wallet:');
+
+echo <<<END
+<form action="/" method="get" style="padding: 10px;">
+<input type="text" name="address" class="form-control form-control-lg" placeholder="Wallet Address"><br>
+<input type="submit" value="Submit" class="btn btn-block btn-secondary btn-lg" ><br><br>
+END;
+
+echo "<table class='dataGrid2'>";
+foreach($recents as $addr)
+{
+	if(empty($addr)) continue;
+
+	$user = getuserparam($addr);
+	if(!$user) continue;
+
+	$coin = getdbo('db_coins', $user->coinid);
+
+	if($user->username == $username)
+		echo "<tr style='background-color: #41464b;'><td width=24>";
+	else
+		echo "<tr class='ssrow'><td width=24>";
+
+	if($coin)
+		echo '<img width="16px" src="'.$coin->image.'">';
+
+	echo '</td><td><a class="address" href="/?address='.$addr.'" style="font-family: monospace; font-size: 1.1em;">'.
+		$addr.'</a></td>';
+
+	$balance = bitcoinvaluetoa($user->balance);
+
+	if($coin)
+		$balance = $balance>0? "$balance $coin->symbol": '';
+	else
+		$balance = $balance>0? "$balance BTC": '';
+
+	echo '<td align="right">'.$balance.'</td>';
+
+	$delicon = $address == $addr ? '' : '<img src="/images/base/delete.png" onclick="javascript:drop_cookie(this);" style="cursor:pointer;"/>';
+	echo '<td style="width: 16px; max-width: 16px;">'.$delicon.'</td>';
+
+	echo '</tr>';
+}
+
+echo "</table></form></div></div><br>";
+
+
 echo <<<END
 <br>
 
