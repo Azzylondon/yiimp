@@ -1,14 +1,5 @@
 <?php
 
-/*
-*
-*
-* Este fichero fue modificado o actualizado por sabiasque.space
-* Web: https://sabiasque.space/
-*
-*
-*/ 
-
 include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
 include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/content.php";
 
@@ -431,34 +422,15 @@ echo "{$coin->specifications}\n";
 echo "\n";
 }
 echo "alertnotify=echo %s | mail -s \"{$coin->name} alert!\" ".YAAMP_ADMIN_EMAIL."\n";
-echo "blocknotify=/home/yiimp-data/yiimp/site/stratum/blocknotify ".YAAMP_STRATUM_URL.":".$port." ".$coin->id." %s\n";
-/*
-if (empty($coin->dedicatedport))
-{
-    echo "blocknotify=/home/yiimp-data/yiimp/site/stratum/blocknotify ".YAAMP_STRATUM_URL.":".$port." ".$coin->id." %s\n";
-}
-else
-{
-   echo "blocknotify=/home/yiimp-data/yiimp/site/stratum/blocknotify ".YAAMP_STRATUM_URL.":".$dedport." ".$coin->id." %s\n";
-}
-*/
-
+echo "blocknotify=blocknotify.sh $port {$coin->id} %s\n";
 echo " \n";
 echo "' | sudo -E tee {$coin->conf_folder}/$program.conf >/dev/null 2>&1\n";
 echo CHtml::closetag("pre");
 
-$powalgo = '';
-if (substr($coin->program, 0, -1) == 'avian' && $coin->algo == 'x16rt') {
-	$powalgo = '-powalgo=x16rt';
-
-} else if (substr($coin->program, 0, -1) == 'avian' && $coin->algo == 'minotaurx') {
-	$powalgo = '-powalgo=minotaurx';
-}
-
 echo CHtml::tag("hr");
 echo "<b>Add coind to system startup (cron)</b>:";
 echo CHtml::opentag("pre");
-echo "(crontab -l 2>/dev/null; echo \"@reboot sleep 60 && {$coin->program} -datadir={$coin->conf_folder} -conf=$program.conf $powalgo -shrinkdebugfile\") | crontab -\n";
+echo "(crontab -l 2>/dev/null; echo \"@reboot sleep 60 && {$coin->program} -datadir={$coin->conf_folder} -conf=$program.conf -shrinkdebugfile\") | crontab -\n";
 echo "\n";
 echo '<p class="formHint2">add -reindex if coin fails to start.</p>';
 echo CHtml::closetag("pre");
@@ -468,31 +440,18 @@ echo "<b>Coin Daemon Commands</b>:";
 echo "<b>You MUST use this format or coins will not work!</b>:";
 echo CHtml::opentag("pre");
 echo "To START a coind:\n";
-echo "{$coin->program} -datadir={$coin->conf_folder} -conf=$program.conf $powalgo -shrinkdebugfile\n\n";
+echo "{$coin->program} -datadir={$coin->conf_folder} -conf=$program.conf -shrinkdebugfile\n\n";
 echo "To STOP a coind:\n";
 echo "{$coin->program} -datadir={$coin->conf_folder} -conf=$program.conf stop\n\n";
 echo "Or if your coin has a -cli (bitcoin-cli) file...\n";
 echo "$program-cli -datadir={$coin->conf_folder} -conf=$program.conf stop\n\n";
 echo "To run other CLI functions:\n";
-echo "$program-cli -datadir={$coin->conf_folder} -conf=$program.conf help\n";
+echo "$program-cli -datadir={$coin->conf_folder} -conf=$program.conf help\n\n";
+echo " \n";
 echo "To edit the coin.config file:\n";
-echo "sudo nano {$coin->conf_folder}/$program.conf\n\n\n";
-echo "<b>NOTICE: ONLY use if you understand what it does</b>:\n";
-echo "Send manual payments:\n";
-echo "$program-cli -datadir={$coin->conf_folder} -conf=$program.conf sendtoaddress address value \n\n";
-echo "Create wallet:\n";
-echo "$program-cli -datadir={$coin->conf_folder} -conf=$program.conf createwallet \"name\"\n\n";
-echo "List wallet dir:\n";
-echo "$program-cli -datadir={$coin->conf_folder} -conf=$program.conf listwalletdir\n\n";
-echo "Load wallet (load on startup):\n";
-echo "$program-cli -datadir={$coin->conf_folder} -conf=$program.conf loadwallet wallet\n\n";
-echo "Get new address:\n";
-echo "$program-cli -datadir={$coin->conf_folder} -conf=$program.conf getnewaddress \n\n";
-echo "Set label:\n";
-echo "$program-cli -datadir={$coin->conf_folder} -conf=$program.conf setlabel \"{$coin->master_wallet}\" \"label\"\n\n";
-echo "Get wallet information:\n";
-echo "$program-cli -datadir={$coin->conf_folder} -conf=$program.conf getaddressinfo {$coin->master_wallet}\n\n";
+echo "sudo nano {$coin->conf_folder}/$program.conf\n";
 echo CHtml::closetag("pre");
+
 echo CHtml::tag("hr");
 echo "<b>Miner command line</b>:";
 echo CHtml::opentag("pre");
