@@ -30,33 +30,24 @@ echo <<<END
 
 END;
 
-if ( YAAMP_ADIM_LTE )
-{
   echo <<<END
    <!-- Google Font: Source Sans Pro -->
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
    <!-- IonIcons -->
    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   END;
-}
 
 $pageTitle = empty($this->pageTitle) ? YAAMP_SITE_NAME : YAAMP_SITE_NAME . " - " . $this->pageTitle;
-
 echo '<title>' . $pageTitle . '</title>';
 
+echo CHtml::cssFile('/yaamp/AdminLTE/plugins/fontawesome-free/css/all.min.css');
+echo CHtml::cssFile('/yaamp/AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css');
+echo CHtml::cssFile('/yaamp/AdminLTE/dist/css/adminlte.min.css');
 
-if ( YAAMP_ADIM_LTE )
-{
-    echo CHtml::cssFile('/yaamp/AdminLTE/plugins/fontawesome-free/css/all.min.css');
-    echo CHtml::cssFile('/yaamp/AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css');
-    echo CHtml::cssFile('/yaamp/AdminLTE/dist/css/adminlte.min.css');
-}
-else
-{
-    echo CHtml::cssFile("/extensions/jquery/themes/ui-lightness/jquery-ui.css");
-    echo CHtml::cssFile('/yaamp/ui/css/main.css');
-    echo CHtml::cssFile('/yaamp/ui/css/table.css');
-}
+echo CHtml::cssFile("/extensions/jquery/themes/ui-lightness/jquery-ui.css");
+echo CHtml::cssFile('/yaamp/ui/css/main.css');
+echo CHtml::cssFile('/yaamp/ui/css/table.css');
+
 /*
 echo CHtml::cssFile("/extensions/jquery/themes/ui-lightness/jquery-ui.css");
 echo CHtml::cssFile('/yaamp/ui/css/main.css');
@@ -71,22 +62,20 @@ $cs->registerCoreScript('jquery.ui');
 
 echo CHtml::scriptFile('/yaamp/ui/js/jquery.tablesorter.js');
 
-if ( YAAMP_ADIM_LTE )
-{
-  echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/datatables/jquery.dataTables.min.js');
-  echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js');
-  echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js');
-  echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js');
-  echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js');
-  echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js');
+echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/datatables/jquery.dataTables.min.js');
+echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js');
+echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js');
+echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js');
+echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js');
+echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js');
 
-  echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/jquery/jquery.min.js');
-  echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js');
-  echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js');
-  echo CHtml::scriptFile('/yaamp/AdminLTE/dist/js/adminlte.js');
-  echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/chart.js/Chart.min.js');
-  echo CHtml::scriptFile('/yaamp/AdminLTE/dist/js/pages/dashboard.js');
-}
+echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/jquery/jquery.min.js');
+echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js');
+echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js');
+echo CHtml::scriptFile('/yaamp/AdminLTE/dist/js/adminlte.js');
+echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/chart.js/Chart.min.js');
+echo CHtml::scriptFile('/yaamp/AdminLTE/dist/js/pages/dashboard.js');
+
 
 /*
 * Mostrar publicidad si no eres administrador
@@ -101,17 +90,9 @@ echo "</head>";
 
 ///////////////////////////////////////////////////////////////
 
-if (YAAMP_ADIM_LTE)
-{
-    echo '<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">';
-}
-else
-{
-    echo '<body class="page">';
-    echo '<a href="/site/mainbtc" style="display: none;">main</a>';
-}
+echo '<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">';
 
-if ( ! YAAMP_ADIM_LTE ) { showPageHeader(); }
+showPageHeader();
 showPageContent($content);
 showPageFooter();
 
@@ -131,88 +112,11 @@ function showItemHeader($selected, $url, $name)
     echo "&nbsp;";
 }
 
-if ( ! YAAMP_ADIM_LTE )
+function showPageHeader()
 {
-
-    function showPageHeader()
-    {
-        echo '<div class="tabmenu-out">';
-        echo '<a href="/"><img src="/images/logo.png"></a>';
-        echo '<div class="tabmenu-inner">';
-
-        echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/">' . YAAMP_SITE_NAME . '</a>';
-
-        $action = controller()->action->id;
-        $wallet = user()->getState('yaamp-wallet');
-        $ad     = isset($_GET['address']);
-
-        showItemHeader(controller()->id == 'site' && $action == 'index' && !$ad, '/', 'Home');
-        showItemHeader($action == 'mining', '/site/mining', 'Pool');
-        showItemHeader(controller()->id == 'site' && ($action == 'index' || $action == 'wallet') && $ad, "/?address=$wallet", 'Wallet');
-        showItemHeader(controller()->id == 'stats', '/stats', 'Graphs');
-        showItemHeader($action == 'miners', '/site/miners', 'Miners');
-        if (YIIMP_PUBLIC_EXPLORER)
-            showItemHeader(controller()->id == 'explorer', '/explorer', 'Explorers');
-
-        if (YIIMP_PUBLIC_BENCHMARK)
-            showItemHeader(controller()->id == 'bench', '/bench', 'Benchs');
-
-        if (YAAMP_RENTAL)
-            showItemHeader(controller()->id == 'renting', '/renting', 'Rental');
-
-        if (controller()->admin) {
-            if (isAdminIP($_SERVER['REMOTE_ADDR']) === false)
-                debuglog("admin {$_SERVER['REMOTE_ADDR']}");
-
-            showItemHeader(controller()->id == 'coin', '/coin', 'Coins');
-            showItemHeader($action == 'common', '/site/common', 'Dashboard');
-            showItemHeader(controller()->id == 'site' && $action == 'admin', "/site/admin", 'Wallets');
-
-            if (YAAMP_RENTAL)
-                showItemHeader(controller()->id == 'renting' && $action == 'admin', '/renting/admin', 'Jobs');
-
-            if (YAAMP_ALLOW_EXCHANGE)
-                showItemHeader(controller()->id == 'trading', '/trading', 'Trading');
-
-            if (YAAMP_USE_NICEHASH_API)
-                showItemHeader(controller()->id == 'nicehash', '/nicehash', 'Nicehash');
-        }
-
-        echo '<span style="float: right;">';
-
-        $mining      = getdbosql('db_mining');
-        $nextpayment = date('H:i T', $mining->last_payout + YAAMP_PAYMENTS_FREQ);
-        // $nextpayment = date('H:i', $mining->last_payout+YAAMP_PAYMENTS_FREQ) . ' UTC (US)';
-        // define('UTCEUR', 7200);
-        // $nextpaymentEUR = date('H:i', $mining->last_payout+YAAMP_PAYMENTS_FREQ+UTCEUR); // . ' UTC+2 (EUR)';
-        $eta         = ($mining->last_payout + YAAMP_PAYMENTS_FREQ) - time();
-        $eta_mn      = 'in ' . round($eta / 60) . ' minutes';
-
-        //echo '<span id="nextpayout" style="font-size: .8em;" title="' . $eta_mn . '">Next Payout: ' . $nextpayment . '</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-        // echo '<span id="nextpayout" style="font-size: .8em;" title="'.$eta_mn.'">Next Payout: '.$nextpayment.' / '.$nextpaymentEUR.'</span>';
-        //echo '<span id="nextpayout" style="font-size: .8em;" title="'.$eta_mn.'">Next Payout: '.$nextpayment.' UTC (US) / '.$nextpaymentEUR.' UTC+2 (EUR)</span>';
-        //Next Payout: 18:44 UTC in 20 minutes
-        echo '<span id="nextpayout" style="font-size: .8em;" title="' . $nextpayment . '">Next Payout: ' . $nextpayment . ' ' . $eta_mn . '</span>';
-
-        echo "</div>";
-        echo "</div>";
-    }
-}   
+}
 
 function showPageFooter()
 {
-    if ( YAAMP_ADIM_LTE )
-    {
-      include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/footer.php";
-    }
-    else
-    {
-        echo '<div class="footer">';
-        $year = date( "Y", time() );
-    
-        echo "<p>&copy; $year " . YAAMP_SITE_NAME . ' - ' . '<a href="https://sabiasque.space">En colaboración con SabiasQue.Space</a></p>';
-    
-        echo '</div><!-- footer -->';
-    }
-
+   include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/footer.php";
 }
