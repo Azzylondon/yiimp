@@ -8,7 +8,6 @@ $show_details = getparam('showdetails');
 $user = getuserparam(getparam('address'));
 if (!$user) return;
 
-
 openCard('card-primary','Miners: ('.$user->username.')');
 
 $refcoin = getdbo('db_coins', $user->coinid);
@@ -18,11 +17,9 @@ if (!$refcoin)
 			You will not receive payments using this address.</div>";
 
     $refcoin = getdbosql('db_coins', "symbol='BTC'");
-
 }
 elseif (!YAAMP_ALLOW_EXCHANGE && $user->coinid == 6 && $defaultalgo != 'sha256')
 {
-
     echo "<div style='color: red; padding: 10px; '>This pool does not convert/trade currencies.
 		You will not receive payments using this BTC address.</div>";
     return;
@@ -155,22 +152,11 @@ $total_paid = bitcoinvaluetoa($total_paid);
 $total_earned = bitcoinvaluetoa($total_unsold + $balance + $total_paid);
 //$total_earned_usd = number_format($total_earned*$mining->usdbtc*$refcoin->price, 3, '.', ' ');
 
-echo "</table>";
-
-echo "</div>";
-
 if ($refcoin->symbol == 'BTC')
 {
     $usd = number_format($mining->usdbtc, 2, '.', ' ');
     echo '** bitstamp <b>' . $usd . '</b> USD/BTC';
 }
-echo '</p>';
-
-echo '</div><br/>';
-
-echo "</div>"; //card-body table-responsive p-0
-
-//echo "</div><br>";
 
 ?>
 
@@ -276,7 +262,7 @@ echo "</div>"; //card-body table-responsive p-0
 
 <?php
 
-openCard('card-primary','Last 24 Hours Payouts: ('.$user->username.')');
+openCard('card-primary','Last 24 Hours Payouts');
 
 $t = time() - 24 * 60 * 60;
 $list = getdbolist('db_payouts', "account_id={$user->id} AND time>$t ORDER BY time DESC");
