@@ -159,7 +159,6 @@ foreach ($db_blocks as $db_block)
     }
     else if ($db_block->category == 'generate')
     {
-        //echo '<span class="block confirmed">Confirmed</span>';
         echo '<span class="badge bg-success">Confirmed</span>';
     }
     else if ($db_block->category == 'new')

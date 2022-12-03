@@ -2,13 +2,6 @@
 
 include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
 
-function WriteBoxHeader($title)
-{
-	echo "<div class='main-left-box'>";
-	echo "<div class='main-left-title'>$title</div>";
-	echo "<div class='main-left-inner'>";
-}
-
 $algo = user()->getState('yaamp-algo');
 
 $user = getuserparam(getparam('address'));
@@ -17,8 +10,6 @@ if(!$user || $user->is_locked) return;
 $count = getparam('count');
 $count = $count? $count: 20;
 
-
-//WriteBoxHeader("Last $count Blocks found by $user->username");
 openCard('card-primary',"Last $count Blocks found by ($user->username)");
 echo '<div class="card-body table-responsive p-0">';
 $db_blocks = getdbolist('db_blocks', "userid=$user->id order by time desc limit :count", array(':count'=>$count));
@@ -36,7 +27,7 @@ span.block2 { padding: 2px; display: inline-block; text-align: center; min-width
 span.block2.solo { color: white;  background-color: #4ca6b3 !important; }
 span.block2.shared { color: white;  background-color: #4ca6b3 !important; }
 </style>
-<table class="dataGrid2">
+<table class="table table-sm">
 <thead>
 <tr>
 <th style='max-width:18px'></th>
@@ -85,18 +76,18 @@ foreach($db_blocks as $db_block)
 	echo '<td data="'.$db_block->time.'"><b>'.$d.' ago</b></td>';
 
 	echo '<td>';
-	if($db_block->solo == '1') 
+	if($db_block->solo == '1')
 		echo '<span class="block2 solo" title="Block was found by solo miner">Solo</span>';
-	else 
-                echo '<span class="block2 shared" title="Block was found by shared miners">Shared</span>'; 
+	else
+        echo '<span class="block2 shared" title="Block was found by shared miners">Shared</span>'; 
 	echo "</td>";
 
 	echo '<td class="'.strtolower($db_block->category).'">';
 
 	if($db_block->category == 'orphan')
-		echo '<span class="block orphan">Orphan</span>';
+	    echo '<span class="badge bg-danger">Orphan</span>';
 
-	else if($db_block->category == 'immature') 
+	else if($db_block->category == 'immature')
 	{
 		$eta = '';
 		if ($coin->block_time && $coin->mature_blocks) 
@@ -104,14 +95,15 @@ foreach($db_blocks as $db_block)
 			$t = (int) ($coin->mature_blocks - $db_block->confirmations) * $coin->block_time;
 			$eta = "ETA: ".sprintf('%dh %02dmn', ($t/3600), ($t/60)%60);
 		}
-		echo '<span class="block immature" title="'.$eta.'">Immature ('.$db_block->confirmations.'/'.$coin->mature_blocks.')</span>';
+		//echo '<span class="block immature" title="'.$eta.'">Immature ('.$db_block->confirmations.'/'.$coin->mature_blocks.')</span>';
+		$datos = array($db_block->confirmations, $coin->mature_blocks);
+        ProgressBars ('horizontal', 2, 'Immature', $datos, $db_block->confirmations);
 	}
 
 	else if($db_block->category == 'generate')
-		echo '<span class="block confirmed">Confirmed</span>';
+	         echo '<span class="badge bg-success">Confirmed</span>';
 
 	echo "</td>";
-
 	echo "</tr>";
 }
 
