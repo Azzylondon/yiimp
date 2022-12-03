@@ -1,5 +1,7 @@
 <?php
 
+include_once "/home/yiimp-data/yiimp/site/web/yaamp/AdminLTE/function.php";
+
 function WriteBoxHeader($title)
 {
 	echo "<div class='main-left-box'>";
@@ -16,7 +18,11 @@ $count = getparam('count');
 $count = $count? $count: 20;
 
 
-WriteBoxHeader("Last $count Blocks found by $user->username");
+//WriteBoxHeader("Last $count Blocks found by $user->username");
+openCard('card-primary',"Last $count Blocks found by ($user->username)" );
+
+echo '<div class="card-body table-responsive p-0">';
+
 $db_blocks = getdbolist('db_blocks', "userid=$user->id order by time desc limit :count", array(':count'=>$count));
 
 
@@ -32,7 +38,7 @@ span.block2 { padding: 2px; display: inline-block; text-align: center; min-width
 span.block2.solo { color: white;  background-color: #4ca6b3 !important; }
 span.block2.shared { color: white;  background-color: #4ca6b3 !important; }
 </style>
-<table class="dataGrid2">
+<table class="table table-sm">
 <thead>
 <tr>
 <th style='max-width:18px'></th>
