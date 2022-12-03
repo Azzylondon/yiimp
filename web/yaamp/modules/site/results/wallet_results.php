@@ -353,13 +353,12 @@ echo "</div><br>";
 <div class="row">
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box">
-              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-balanced"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Balance</span>
                 <span class="info-box-number">
                   <?=$balance .' '. $refcoin->symbol?>
-                  <small>%</small>
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -369,7 +368,22 @@ echo "</div><br>";
           <!-- /.col -->
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Total Unpaid</span>
+                <span class="info-box-number"><?=$total_unpaid. ' '.$refcoin->symbol?></span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+
+                    <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cubes"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Total Unpaid</span>
@@ -386,7 +400,7 @@ echo "</div><br>";
 
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-wallet"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Total Paid</span>
@@ -399,7 +413,7 @@ echo "</div><br>";
           <!-- /.col -->
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-wallet"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Total Earned</span>
