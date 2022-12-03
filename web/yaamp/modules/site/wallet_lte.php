@@ -90,7 +90,7 @@ END;
 
 	if($user)
 	{
-		openCard('card-primary','Last 24 Hours Balance: ');
+		openCard('card-primary','Last 24 Hours Balance');
 
 		echo <<<END
 		<div id='graph_earnings_results' style='height: 240px;'></div>
@@ -143,7 +143,7 @@ END;
 
 <?php
 
-openCard('card-primary','Search Wallet:');
+openCard('card-primary','Search Wallet');
 
 echo <<<END
 <form action="/" method="get" style="padding: 10px;">
