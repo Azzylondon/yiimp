@@ -55,7 +55,8 @@ $cs = app()->getClientScript();
 $cs->registerCoreScript('jquery.ui');
 //$cs->registerScriptFile('/yaamp/ui/js/jquery.tablesorter.js', CClientScript::POS_END);
 
-echo CHtml::scriptFile('/yaamp/ui/js/jquery.tablesorter.js');
+//echo CHtml::scriptFile('/yaamp/ui/js/jquery.tablesorter.js');
+echo CHtml::scriptFile('https://cdn.jsdelivr.net/npm/apexcharts');
 
 echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/datatables/jquery.dataTables.min.js');
 echo CHtml::scriptFile('/yaamp/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js');
