@@ -105,17 +105,17 @@ $workers = getdbolist('db_workers', "userid=$user->id order by password");
 if (count($workers))
 {
     echo "<br>";
-    echo "<table  class='dataGrid2'>";
+    echo "<table  class='table table-sm'>";
     echo "<thead>";
     echo "<tr>";
-    echo "<th align=left>Details</th>";
+    echo "<th>Details</th>";
     if ($this->admin) echo "<th>IP</th>";
-    echo "<th align=left>Extra</th>";
-    echo "<th align=left>Algo</th>";
-    echo "<th align=right>Diff</th>";
-    echo "<th align=right title='extranonce.subscribe'>ES**</th>";
-    echo "<th align=right width=80>Hashrate*</th>";
-    echo "<th align=right width=60>Reject*</th>";
+    echo "<th>Extra</th>";
+    echo "<th>Algo</th>";
+    echo "<th>Diff</th>";
+    echo "<th title='extranonce.subscribe'>ES**</th>";
+    echo "<th>Hashrate*</th>";
+    echo "<th>Reject*</th>";
     echo "</tr>";
     echo "</thead>";
 
@@ -142,10 +142,10 @@ if (count($workers))
         if ($this->admin) echo "<td>{$worker->ip}</td>";
         echo '<td title="' . $worker->password . '">' . $password . '</td>';
         echo '<td>' . $worker->algo . '</td>';
-        echo '<td align="right">' . $worker->difficulty . '</td>';
-        echo '<td align="right">' . $subscribe . '</td>';
-        echo '<td align="right">' . $user_rate1 . '</td>';
-        echo '<td align="center" title="' . $percent . '">' . $user_rejects . '</td>';
+        echo '<td>' . $worker->difficulty . '</td>';
+        echo '<td>' . $subscribe . '</td>';
+        echo '<td>' . $user_rate1 . '</td>';
+        echo '<td title="' . $percent . '">' . $user_rejects . '</td>';
         echo '</tr>';
     }
 
@@ -154,7 +154,7 @@ if (count($workers))
 
 echo "</div>";
 
-echo "<p style='font-size: .8em'>
+echo "<br><p style='font-size: .8em'>
 		&nbsp;* approximate from the last 5 minutes submitted shares<br>
 		&nbsp;** extranonce.subscribe<br>
 		</p>";
